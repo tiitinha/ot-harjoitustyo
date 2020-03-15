@@ -10,5 +10,9 @@ Ohjelmistotuotantokurssin *harjoitustyön* **readme**.
 
 ## Viikko 2
 
+<<<<<<< HEAD
 Lisää tekstiä
 
+=======
+Tehdään muutos
+>>>>>>> c422f8e934511d536bba71a05a7b31c242899bdf
