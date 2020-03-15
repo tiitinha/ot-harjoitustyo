@@ -1,3 +1,3 @@
-#Harjoitustyö#
+# Harjoitustyö
 
 Ohjelmistotuotantokurssin *harjoitustyön* **readme**.
