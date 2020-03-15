@@ -1,0 +1,122 @@
+commit 82e3ee2ccd728935d4cb0c57e9119acdc6eeaf05
+Author: afroseppo <kobo-kobe@hotmail.com>
+Date:   Sun Mar 15 15:02:15 2020 +0200
+
+    poistettu file1 ja muutettu file2 --> file22
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 09fbeef17a4372616280d1f82368ccb8d1d13244
+Author: afroseppo <kobo-kobe@hotmail.com>
+Date:   Sun Mar 15 15:00:40 2020 +0200
+
+    muutettu file3
+
+ tiedostoja/file3 | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit 980bbdf04940c7618fe59644a36918b05534e1ad
+Author: afroseppo <kobo-kobe@hotmail.com>
+Date:   Sun Mar 15 14:59:50 2020 +0200
+
+    lisätty tiedostoja ja tiedostot
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit a2e8ebf8cd862808e5022b37d8a09c7d1c8f0dc0
+Author: afroseppo <kobo-kobe@hotmail.com>
+Date:   Sun Mar 15 14:54:05 2020 +0200
+
+    muutettu eka.txt ja kolmas.txt
+
+ eka.txt    | 2 +-
+ kolmas.txt | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+commit 5efbea7bd5a9107032a9749b5a679c47c5a93a1a
+Author: afroseppo <kobo-kobe@hotmail.com>
+Date:   Sun Mar 15 14:53:09 2020 +0200
+
+    uudelleennimetty tiedosto.txt -> eka.txt
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 5f83c4dd33e0ba53f54376650d0cdf136c090d6e
+Author: afroseppo <kobo-kobe@hotmail.com>
+Date:   Sun Mar 15 14:52:35 2020 +0200
+
+    poistettu toinen.txt
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit e1af0c3ce882264e6183f13962194a2662d0363d
+Author: afroseppo <kobo-kobe@hotmail.com>
+Date:   Sun Mar 15 14:50:46 2020 +0200
+
+    muutettu tiedostoa lisää
+
+ tiedosto.txt | 11 ++---------
+ 1 file changed, 2 insertions(+), 9 deletions(-)
+
+commit 3762c3bda7aa4b66175fa36a87910b829854f71f
+Author: afroseppo <kobo-kobe@hotmail.com>
+Date:   Sun Mar 15 14:49:52 2020 +0200
+
+    muutettu tiedostoa
+
+ tiedosto.txt | 42 +++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 41 insertions(+), 1 deletion(-)
+
+commit 6ac097ee242bee8ebcbeaf27a6659cef6081aed1
+Author: afroseppo <kobo-kobe@hotmail.com>
+Date:   Sun Mar 15 14:47:30 2020 +0200
+
+    lisätty stuff ja sen sisälle kopioitu toinen.txt
+
+ stuff/toinen.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit fcffad508887f830e9434498544837ee3df3232b
+Author: afroseppo <kobo-kobe@hotmail.com>
+Date:   Sun Mar 15 14:46:39 2020 +0200
+
+    toinen ja kolmas muutettu
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit 0bc6d3bcd9fd2b77354b76f31148d3aeb345add5
+Author: afroseppo <kobo-kobe@hotmail.com>
+Date:   Sun Mar 15 14:45:32 2020 +0200
+
+    kolmas.txt lisätty
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 11b6edf9a7fc90f496c804d921e7308f4f49ead0
+Author: afroseppo <kobo-kobe@hotmail.com>
+Date:   Sun Mar 15 14:43:39 2020 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit 400f547cf5810eeec3864ca3981f3a7559a5f151
+Author: afroseppo <kobo-kobe@hotmail.com>
+Date:   Sun Mar 15 14:42:20 2020 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
