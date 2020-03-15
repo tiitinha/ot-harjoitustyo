@@ -1,4 +1,4 @@
-# Harjoitustyö
+# Harjoitustyö, ohjelmistotuotantokurssi
 
 Ohjelmistotuotantokurssin *harjoitustyön* **readme**.
 
