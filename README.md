@@ -9,10 +9,3 @@ Ohjelmistotuotantokurssin *harjoitustyön* **readme**.
 [komentorivi.txt](https://github.com/afroseppo/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
 
 ## Viikko 2
-
-<<<<<<< HEAD
-Lisää tekstiä
-
-=======
-Tehdään muutos
->>>>>>> c422f8e934511d536bba71a05a7b31c242899bdf
