@@ -43,4 +43,7 @@ public class User {
         return name.equals(other.name);
     }
     
+    public boolean checkPassword(String pw) {
+        return password.equals(pw);
+    }
 }
