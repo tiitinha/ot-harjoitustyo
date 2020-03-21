@@ -32,4 +32,15 @@ public class User {
         return password;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof User)) {
+            return false;
+        }
+        
+        User other = (User) obj;
+        
+        return name.equals(other.name);
+    }
+    
 }
