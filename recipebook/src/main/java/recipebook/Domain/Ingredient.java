@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Domain;
+package recipebook.Domain;
 
 /**
  * The class represents a single ingredient that is used in a recipe. Each ingredient is associated with a name, amount and unit of of the amount.
