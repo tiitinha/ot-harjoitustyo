@@ -5,10 +5,19 @@
  */
 package recipebook.Dao;
 
+import java.util.List;
+import recipebook.Domain.User;
+
 /**
  *
  * @author tiitinha
  */
 public interface UserDao {
+    
+    User createUser(User user) throws Exception;
+    
+    User findByUserName(String username);
+    
+    List<User> getAll();
     
 }

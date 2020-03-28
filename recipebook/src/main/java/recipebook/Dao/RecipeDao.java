@@ -5,10 +5,20 @@
  */
 package recipebook.Dao;
 
+import java.util.List;
+import recipebook.Domain.Recipe;
+import recipebook.Domain.User;
+
 /**
  *
  * @author tiitinha
  */
 public interface RecipeDao {
+    
+    Recipe addRecipe(User user, String name) throws Exception;
+    
+    Recipe fetchRecipe(String name);
+    
+    List<Recipe> getAll();
     
 }

@@ -3,16 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package recipebook.UI;
+package recipebook;
+
+import recipebook.UI.TextUI;
 
 /**
  *
  * @author tiitinha
  */
-public class TextUI {
+public class Main {
     
     public static void main(String[] args) {
-        System.out.println("Moi");
+        TextUI.main(args);
     }
     
 }
