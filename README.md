@@ -1,13 +1,21 @@
-# Harjoitustyö, ohjelmistotuotantokurssi
+#Recipebook
 
-Ohjelmistotuotantokurssin *harjoitustyön* **readme**.
+Sovelluksen avulla käyttäjät voivat koota reseptikirjaa (lisätä uusia reseptejä sekä selata ja etsiä muiden lisäämiä reseptejä). Sovellusta voi käyttää useampi rekisteröitynyt käyttäjä, jotka voivat hallinnoida (poistaa) omia reseptejään.
 
-## Viikko 1
+##Dokumentaatio
+[Käyttöohje](https://github.com/afroseppo/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
+[Vaatimusmäärittely](https://github.com/afroseppo/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
+[Arkkitehtuurikuvaus]https://github.com/afroseppo/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
+[Testausdokumentti](https://github.com/afroseppo/ot-harjoitustyo/blob/master/dokumentaatio/testaus.md)
+[Työaikakirjanpito](https://github.com/afroseppo/ot-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
 
-[gitlog.txt](https://github.com/afroseppo/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
+##Komentorivitoiminnot
 
-[komentorivi.txt](https://github.com/afroseppo/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
+###Testaus
+Testit suoritetaan komennolla
+    mvn test
 
-## Viikko 2
+Testikattavuusraportti luodaan komennolla
+    mvn jacoco:report`
 
-[testikattavuus.png](https://github.com/afroseppo/ot-harjoitustyo/blob/master/laskarit/viikko2/testikattavuus.png)
+Kattavuusraporttia voi luonnin jälkeen tarkastella tiedostosta target/site/jacoco/index.html avaamalla tiedoston selaimella.
