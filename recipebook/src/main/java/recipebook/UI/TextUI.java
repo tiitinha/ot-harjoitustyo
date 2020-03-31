@@ -12,7 +12,7 @@ package recipebook.UI;
 public class TextUI {
     
     public static void main(String[] args) {
-        System.out.println("Moi");
+        System.out.println("This is a recipebook... under consteuction...");
     }
     
 }
