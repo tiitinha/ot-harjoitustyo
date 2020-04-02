@@ -4,11 +4,8 @@
  * and open the template in the editor.
  */
 package recipebook.Dao;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 import recipebook.Domain.Recipe;
 import recipebook.Domain.User;
 ;
@@ -18,6 +15,12 @@ import recipebook.Domain.User;
  * @author tiitinha
  */
 public class DatabaseRecipeDao implements RecipeDao {
+    private String database;
+    private List<User> users;
+
+    public DatabaseRecipeDao(String database, UserDao users) throws Exception {
+        this.database = database;
+    }
 
     @Override
     public Recipe addRecipe(User user, String name) throws Exception {
