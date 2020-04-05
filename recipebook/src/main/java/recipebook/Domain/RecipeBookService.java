@@ -80,6 +80,7 @@ public class RecipeBookService {
     /**
      *
      * @param username username
+     * @param password password
      * @return true, if the username exists in the database, false otherwise
      */
     public boolean login(String username, String password) {
