@@ -23,6 +23,8 @@ import recipebook.Domain.RecipeBookService;
  * @author tiitinha
  */
 public class GUI extends Application {
+    
+    private RecipeBookService recipebook;
 
     @Override
     public void init() throws Exception {
@@ -37,7 +39,7 @@ public class GUI extends Application {
         
         UserDao userDao = new DatabaseUserDao(databaseFile);
         RecipeDao recipeDao = new DatabaseRecipeDao(databaseFile, userDao);
-        RecipeBookService recipebook = new RecipeBookService(recipeDao, userDao);
+        recipebook = new RecipeBookService(recipeDao, userDao);
         recipebook.checkIfDatabaseExists(databaseFile);
     }
 
@@ -53,6 +55,15 @@ public class GUI extends Application {
         root.getChildren().add(text);
         
         Scene scene = new Scene(root, 1200, 800);
+        
+        /* Login window */
+        
+        String user = "";
+        String password = "";
+        
+        recipebook.login(user, password);
+        
+        /* Set the scene */
         
         primaryStage.setScene(scene);
         

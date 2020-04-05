@@ -17,6 +17,7 @@ public class RecipeBookService {
 
     private RecipeDao recipeDao;
     private UserDao userDao;
+    private User loggedIn;
 
     public RecipeBookService(RecipeDao recipeDao, UserDao userDao) {
         this.recipeDao = recipeDao;
@@ -24,13 +25,13 @@ public class RecipeBookService {
     }
 
     /**
-     * 
+     *
      * @param name the name of the new recipe
      * @return true, if creating the recipe succeeds, otherwise false
      */
     public boolean createNewRecipe(String name) {
         Recipe recipe = new Recipe(name);
-        
+
         return true;
         /*
         try {
@@ -42,7 +43,7 @@ public class RecipeBookService {
     }
 
     /**
-     * 
+     *
      * @param recipeName the name of the recipe to which the ingredient is added
      * @param name the name of the ingredient
      * @param amount the amount of the ingredient
@@ -52,26 +53,52 @@ public class RecipeBookService {
     public boolean addIngredient(String recipeName, String name, int amount, String unit) {
 
         try {
-            
-            return true; /*recipe.addIngredient(name, amount, unit);*/
+            return true;
+            /*recipe.addIngredient(name, amount, unit);*/
         } catch (Exception ex) {
             return false;
         }
 
     }
-    
+
     /**
-     * Checks whether a database to store the data exists, if not, then creates a new database
+     * Checks whether a database to store the data exists, if not, then creates
+     * a new database
+     *
      * @param path the path of the database file from the config file
      */
     public void checkIfDatabaseExists(String path) {
+
+        Database database = new Database();
+
+        if (!database.databaseExists(path)) {
+            database.createDatabase(path);
+        }
+
+    }
+
+    /**
+     *
+     * @param username username
+     * @return true, if the username exists in the database, false otherwise
+     */
+    public boolean login(String username, String password) {
+        User user = userDao.findByUserName(username);
+
+        if (user == null) {
+            return false;
+        }
+
+        if (user.checkPassword(password)) {
+            loggedIn = user;
+            return true;
+        }
         
-         Database database = new Database();
-         
-         if (!database.databaseExists(path)) {
-             database.createDatabase(path);
-         }
-        
+        return false;
+    }
+
+    public User getLoggedUser() {
+        return loggedIn;
     }
 
 }
