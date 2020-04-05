@@ -33,7 +33,7 @@ public class FakeUserDao implements UserDao {
     }
 
     @Override
-    public List<User> getAll() {
+    public List<User> getAllUsers() {
         return users;
     }
     

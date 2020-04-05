@@ -5,6 +5,7 @@
  */
 package recipebook.Domain;
 
+import recipebook.Dao.Database;
 import recipebook.Dao.RecipeDao;
 import recipebook.Dao.UserDao;
 
@@ -60,13 +61,17 @@ public class RecipeBookService {
     }
     
     /**
-     * Connects to (or creates a new) local database, where all data is stored
-     * @return false, if connection fails, otherwise true
+     * Checks whether a database to store the data exists, if not, then creates a new database
+     * @param path the path of the database file from the config file
      */
-    public boolean connectToDatabase() {
+    public void checkIfDatabaseExists(String path) {
         
+         Database database = new Database();
+         
+         if (!database.databaseExists(path)) {
+             database.createDatabase(path);
+         }
         
-        return true;
     }
 
 }

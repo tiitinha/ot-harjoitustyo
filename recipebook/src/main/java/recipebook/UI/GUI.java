@@ -16,6 +16,7 @@ import recipebook.Dao.DatabaseRecipeDao;
 import recipebook.Dao.DatabaseUserDao;
 import recipebook.Dao.RecipeDao;
 import recipebook.Dao.UserDao;
+import recipebook.Domain.RecipeBookService;
 
 /**
  *
@@ -30,9 +31,14 @@ public class GUI extends Application {
         properties.load(new FileInputStream("config.properties"));
 
         String database = properties.getProperty("database");
+        String databasePath = properties.getProperty("databasePath");
         
-        UserDao userDao = new DatabaseUserDao(database);
-        RecipeDao recipeDao = new DatabaseRecipeDao(database, userDao);
+        String databaseFile = database + databasePath;
+        
+        UserDao userDao = new DatabaseUserDao(databaseFile);
+        RecipeDao recipeDao = new DatabaseRecipeDao(databaseFile, userDao);
+        RecipeBookService recipebook = new RecipeBookService(recipeDao, userDao);
+        recipebook.checkIfDatabaseExists(databaseFile);
     }
 
     public static void main(String[] args) {
@@ -46,7 +52,7 @@ public class GUI extends Application {
         Text text = new Text("Recipebook is currently under construction!");
         root.getChildren().add(text);
         
-        Scene scene = new Scene(root, 400, 400);
+        Scene scene = new Scene(root, 1200, 800);
         
         primaryStage.setScene(scene);
         
