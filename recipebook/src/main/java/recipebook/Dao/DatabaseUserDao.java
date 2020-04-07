@@ -35,7 +35,8 @@ public class DatabaseUserDao implements UserDao {
      *
      * @return returns true, if connection to database successful, otherwise
      * false
-     * @throws java.lang.Exception if other than SQLException, the exception is thrown
+     * @throws java.lang.Exception if other than SQLException, the exception is
+     * thrown
      */
     public boolean getUsersFromDatabase() throws Exception {
         try {
@@ -70,26 +71,28 @@ public class DatabaseUserDao implements UserDao {
      */
     @Override
     public User createUser(User user) throws SQLException {
+        if (!users.contains(user)) {
+            try {
+                Connection db = DriverManager.getConnection("jdbc:h2:" + database, "admin", "");
+                Statement s = db.createStatement();
 
-        try {
-            Connection db = DriverManager.getConnection("jdbc:h2:" + database, "admin", "");
-            Statement s = db.createStatement();
+                PreparedStatement stmt = db.prepareStatement("INSERT INTO User (name, password) VALUES (?, ?);");
+                stmt.setString(1, user.getName());
+                stmt.setString(2, user.getPassword());
 
-            PreparedStatement stmt = db.prepareStatement("INSERT INTO user (name, password) VALUES (?, ?);");
-            stmt.setString(1, user.getName());
-            stmt.setString(2, user.getPassword());
+                stmt.executeUpdate();
+                stmt.close();
+                db.close();
 
-            stmt.executeUpdate();
-            stmt.close();
-            db.close();
-            
-            users.add(user);
+                users.add(user);
 
-        } catch (SQLException e) {
-            throw e;
+            } catch (SQLException e) {
+                System.out.println(e.fillInStackTrace());
+                throw e;
+            }
+            return user;
         }
-
-        return user;
+        return null;
     }
 
     @Override

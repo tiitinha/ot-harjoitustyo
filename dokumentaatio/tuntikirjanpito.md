@@ -9,4 +9,5 @@
 | 4.4.  | 2    | Tutustuminen h2:n, Maven-riippuvuudet sekä tietokannan käsittelyyn tutustuminen sekä koodin työstäminen|
 | 5.4.  | 5    | h2:n tutustiminen, tiedon tallentamiseen sekä sen lukemiseen vaadittavan koodin kirjoittaminen sekä testit tietokantaluokalle |
 | 6.4.  | 1    | GUI:n työstäminen |
-| yht   | 15.5 | |
+| 7.4.  | 2    | Käyttäjänluomisominaisuuden työstäminen |
+| yht   | 17.5 | |

@@ -9,7 +9,7 @@ package recipebook.Domain;
  *
  * @author tiitinha
  */
-public class User {
+public class User implements Comparable<User> {
 
     private String name;
     private String password;
@@ -46,4 +46,11 @@ public class User {
     public boolean checkPassword(String pw) {
         return password.equals(pw);
     }
+
+
+    @Override
+    public int compareTo(User t) {
+        return this.name.hashCode() - t.name.hashCode();
+    }
+    
 }

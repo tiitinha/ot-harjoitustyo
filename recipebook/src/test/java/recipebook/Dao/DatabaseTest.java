@@ -31,11 +31,4 @@ public class DatabaseTest {
     public void createDatabseReturnsTrueIfDatabaseSuccessfullyCreated() {
         assertTrue(db.createDatabase(path));
     }
-    
-    @Test
-    public void databaseExistsReturnsTrueIfExists() {
-        assertTrue(db.databaseExists(path));
-    }
-
-
 }

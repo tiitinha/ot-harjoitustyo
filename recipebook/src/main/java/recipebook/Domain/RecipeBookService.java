@@ -5,6 +5,7 @@
  */
 package recipebook.Domain;
 
+import java.sql.SQLException;
 import recipebook.Dao.Database;
 import recipebook.Dao.RecipeDao;
 import recipebook.Dao.UserDao;
@@ -67,13 +68,11 @@ public class RecipeBookService {
      *
      * @param path the path of the database file from the config file
      */
-    public void checkIfDatabaseExists(String path) {
+    public void connectToDatabase(String path) {
 
         Database database = new Database();
 
-        if (!database.databaseExists(path)) {
-            database.createDatabase(path);
-        }
+        database.createDatabase(path);
 
     }
 
@@ -94,12 +93,28 @@ public class RecipeBookService {
             loggedIn = user;
             return true;
         }
-        
+
         return false;
     }
 
     public User getLoggedUser() {
         return loggedIn;
+    }
+
+    public boolean creteUser(String username, String password) {
+        try {
+            User user = new User(username, password);
+            User returnUser = userDao.createUser(user);
+            if (returnUser != null) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println("RUNTIME ERROR");
+        } catch (Exception e) {
+            return false;
+        }
+
+        return false;
     }
 
 }

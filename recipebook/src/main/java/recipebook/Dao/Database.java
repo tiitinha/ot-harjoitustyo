@@ -44,22 +44,4 @@ public class Database {
         return true;
     }
 
-    /**
-     * Checks whether a database exists
-     *
-     * @return false, if database doesn't exists, otherwise true
-     */
-    public boolean databaseExists(String path) {
-
-        Connection connection = null;
-
-        try {
-            Connection db = DriverManager.getConnection("jdbc:h2:" + path, "admin", "");
-        } catch (Exception e) {
-            return false;
-        }
-        
-        return true;
-    }
-
 }
