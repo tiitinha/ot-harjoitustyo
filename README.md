@@ -4,9 +4,13 @@ Sovelluksen avulla käyttäjät voivat koota reseptikirjaa (lisätä uusia resep
 
 ## Dokumentaatio
 [Käyttöohje](https://github.com/afroseppo/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
+
 [Vaatimusmäärittely](https://github.com/afroseppo/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmaarittely.md)
+
 [Arkkitehtuurikuvaus](https://github.com/afroseppo/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
+
 [Testausdokumentti](https://github.com/afroseppo/ot-harjoitustyo/blob/master/dokumentaatio/testaus.md)
+
 [Työaikakirjanpito](https://github.com/afroseppo/ot-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
 
 ## Komentorivitoiminnot

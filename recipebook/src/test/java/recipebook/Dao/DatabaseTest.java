@@ -16,15 +16,19 @@ import static org.junit.Assert.*;
  *
  * @author tiitinha
  */
-public class RecipeDaoTest {
+public class DatabaseTest {
     
-    public RecipeDaoTest() {
-    }
-
+    private Database db;
+    private String path;
     
     @Before
     public void setUp() {
+        db = new Database();
+        path = "./src/test/resources/database";
     }
     
-
+    @Test
+    public void createDatabseReturnsTrueIfDatabaseSuccessfullyCreated() {
+        assertTrue(db.createDatabase(path));
+    }
 }
