@@ -7,7 +7,6 @@ package recipebook.Dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -18,18 +17,18 @@ import java.sql.Statement;
 public class Database {
 
     /**
-     * 
-     * @param name the name of the database file
+     *
+     * @param path the path to database file
      * @return false if exception during creating the database, otherwise true
      */
-    public boolean createDatabase(String name) {
+    public boolean createDatabase(String path) {
         Connection connection = null;
         try {
-            Connection db = DriverManager.getConnection("jdbc:sqlite:src/Main/Resources/" + name + ".db");
+            Connection db = DriverManager.getConnection("jdbc:h2:" + path, "admin", "");
             Statement s = db.createStatement();
-            s.execute("CREATE TABLE User (id INTEGER PRIMARY KEY, name TEXT, password TEXT)");
-            s.execute("CREATE TABLE Recipe (id INTEGER PRIMARY KEY, name TEXT, createUserId INTEGER)");
-            s.execute("CREATE TABLE Ingredient (id INTEGER PRIMARY KEY, recipeId INTEGER, name TEXT, amount INTEGER, unit TEXT)");
+            s.execute("CREATE TABLE IF NOT EXISTS User (id IDENTITY NOT NULL PRIMARY KEY, name TEXT, password TEXT)");
+            s.execute("CREATE TABLE IF NOT EXISTS Recipe (id IDENTITY NOT NULL PRIMARY KEY, name TEXT, createUserId INTEGER)");
+            s.execute("CREATE TABLE IF NOT EXISTS Ingredient (id IDENTITY NOT NULL PRIMARY KEY, recipeId INTEGER, name TEXT, amount INTEGER, unit TEXT)");
 
         } catch (SQLException e) {
             return false;

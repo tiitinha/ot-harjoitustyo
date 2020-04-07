@@ -5,6 +5,8 @@
  */
 package recipebook.Domain;
 
+import java.sql.SQLException;
+import recipebook.Dao.Database;
 import recipebook.Dao.RecipeDao;
 import recipebook.Dao.UserDao;
 
@@ -16,6 +18,7 @@ public class RecipeBookService {
 
     private RecipeDao recipeDao;
     private UserDao userDao;
+    private User loggedIn;
 
     public RecipeBookService(RecipeDao recipeDao, UserDao userDao) {
         this.recipeDao = recipeDao;
@@ -23,13 +26,13 @@ public class RecipeBookService {
     }
 
     /**
-     * 
+     *
      * @param name the name of the new recipe
      * @return true, if creating the recipe succeeds, otherwise false
      */
     public boolean createNewRecipe(String name) {
         Recipe recipe = new Recipe(name);
-        
+
         return true;
         /*
         try {
@@ -41,7 +44,7 @@ public class RecipeBookService {
     }
 
     /**
-     * 
+     *
      * @param recipeName the name of the recipe to which the ingredient is added
      * @param name the name of the ingredient
      * @param amount the amount of the ingredient
@@ -51,22 +54,67 @@ public class RecipeBookService {
     public boolean addIngredient(String recipeName, String name, int amount, String unit) {
 
         try {
-            
-            return true; /*recipe.addIngredient(name, amount, unit);*/
+            return true;
+            /*recipe.addIngredient(name, amount, unit);*/
         } catch (Exception ex) {
             return false;
         }
 
     }
-    
+
     /**
-     * Connects to (or creates a new) local database, where all data is stored
-     * @return false, if connection fails, otherwise true
+     * Checks whether a database to store the data exists, if not, then creates
+     * a new database
+     *
+     * @param path the path of the database file from the config file
      */
-    public boolean connectToDatabase() {
-        
-        
-        return true;
+    public void connectToDatabase(String path) {
+
+        Database database = new Database();
+
+        database.createDatabase(path);
+
+    }
+
+    /**
+     *
+     * @param username username
+     * @param password password
+     * @return true, if the username exists in the database, false otherwise
+     */
+    public boolean login(String username, String password) {
+        User user = userDao.findByUserName(username);
+
+        if (user == null) {
+            return false;
+        }
+
+        if (user.checkPassword(password)) {
+            loggedIn = user;
+            return true;
+        }
+
+        return false;
+    }
+
+    public User getLoggedUser() {
+        return loggedIn;
+    }
+
+    public boolean creteUser(String username, String password) {
+        try {
+            User user = new User(username, password);
+            User returnUser = userDao.createUser(user);
+            if (returnUser != null) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println("RUNTIME ERROR");
+        } catch (Exception e) {
+            return false;
+        }
+
+        return false;
     }
 
 }

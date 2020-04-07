@@ -16,10 +16,11 @@ import recipebook.Domain.User;
  */
 public class DatabaseRecipeDao implements RecipeDao {
     private String database;
-    private List<User> users;
+    private UserDao users;
 
     public DatabaseRecipeDao(String database, UserDao users) throws Exception {
         this.database = database;
+        this.users = users;
     }
 
     @Override
