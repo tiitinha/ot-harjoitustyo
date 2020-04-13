@@ -8,10 +8,10 @@ package recipebook.Domain;
 import java.util.HashMap;
 
 /**
- * 
+ *
  * @author tiitinha
  */
-public class Recipe {
+public class Recipe implements Comparable<Recipe> {
 
     private String name;
     private HashMap<String, Ingredient> ingredients;
@@ -23,6 +23,7 @@ public class Recipe {
 
     /**
      * Method is used to add a new ingredient to a recipe.
+     *
      * @param ingredient the name of the ingredient
      * @param amount the amount of the ingredient
      * @param unit the unit of the amount
@@ -43,6 +44,22 @@ public class Recipe {
 
     public HashMap<String, Ingredient> getIngredients() {
         return ingredients;
+    }
+
+    @Override
+    public int compareTo(Recipe t) {
+        return this.name.hashCode() - t.name.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof User)) {
+            return false;
+        }
+
+        Recipe other = (Recipe) obj;
+
+        return name.equals(other.name);
     }
 
 }

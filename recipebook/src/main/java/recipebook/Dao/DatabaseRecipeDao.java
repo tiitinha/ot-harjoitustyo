@@ -17,6 +17,7 @@ import recipebook.Domain.User;
 public class DatabaseRecipeDao implements RecipeDao {
     private String database;
     private UserDao users;
+    private List<Recipe> recipes;
 
     public DatabaseRecipeDao(String database, UserDao users) throws Exception {
         this.database = database;
@@ -24,8 +25,8 @@ public class DatabaseRecipeDao implements RecipeDao {
     }
 
     @Override
-    public Recipe addRecipe(User user, String name) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean addRecipe(User user, String name) throws Exception {
+        return false;
     }
 
     @Override
@@ -35,6 +36,11 @@ public class DatabaseRecipeDao implements RecipeDao {
 
     @Override
     public List<Recipe> getAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Recipe> getUsersRecipes(User user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

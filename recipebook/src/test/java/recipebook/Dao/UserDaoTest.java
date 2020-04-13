@@ -5,6 +5,7 @@
  */
 package recipebook.Dao;
 
+import recipebook.Domain.DatabaseService;
 import java.util.List;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
@@ -18,13 +19,13 @@ import recipebook.Domain.User;
  */
 public class UserDaoTest {
     
-    private Database db;
+    private DatabaseService db;
     private String path;
 
     
     @Before
     public void setUp() {
-        db = new Database();
+        db = new DatabaseService();
         path = "./src/test/resources/database";
         db.createDatabase(path);
         UserDao dao = new DatabaseUserDao(path);

@@ -5,6 +5,7 @@
  */
 package recipebook.Dao;
 
+import recipebook.Domain.DatabaseService;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,12 +19,12 @@ import static org.junit.Assert.*;
  */
 public class DatabaseTest {
     
-    private Database db;
+    private DatabaseService db;
     private String path;
     
     @Before
     public void setUp() {
-        db = new Database();
+        db = new DatabaseService();
         path = "./src/test/resources/database";
     }
     

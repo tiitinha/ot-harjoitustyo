@@ -9,13 +9,14 @@ import java.io.FileInputStream;
 import java.util.Properties;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -34,7 +35,7 @@ public class GUI extends Application {
     private RecipeBookService recipebook;
     private Scene loginScene;
     private Scene newUserScene;
-    private Scene recipeScene;
+    private Scene mainScene;
     private Scene addRecipeScene;
 
     private Label menuLabel = new Label();
@@ -52,6 +53,7 @@ public class GUI extends Application {
 
         UserDao userDao = new DatabaseUserDao(databaseFile);
         RecipeDao recipeDao = new DatabaseRecipeDao(databaseFile, userDao);
+        
         recipebook = new RecipeBookService(recipeDao, userDao);
         recipebook.connectToDatabase(databaseFile);
     }
@@ -63,7 +65,7 @@ public class GUI extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        // Setup the login window
+        /* Setup the login window */
         VBox welcomePane = new VBox(20);
         VBox loginPane = new VBox(10);
         HBox inputPane = new HBox(10);
@@ -86,9 +88,9 @@ public class GUI extends Application {
             String password = usernamePassword.getText();
             menuLabel.setText(username + " logged in..");
 
-            if (recipebook.login(username, username)) {
+            if (recipebook.login(username, password)) {
                 loginMessage.setText("");
-                primaryStage.setScene(recipeScene);
+                primaryStage.setScene(mainScene);
                 usernameInput.setText("");
             } else {
                 loginMessage.setText("Invalid username or password!");
@@ -105,7 +107,7 @@ public class GUI extends Application {
 
         loginScene = new Scene(loginPane, 750, 500);
 
-        // Setup for creation of a new user
+        /* Setup for creation of a new user */
         Label createNewUserLabel = new Label("The username must be at least 3 characters long and the password 5.");
         VBox newUserPane = new VBox(10);
         HBox newUsernamePane = new HBox(10);
@@ -130,7 +132,7 @@ public class GUI extends Application {
         createNewUserButton.setOnAction((ActionEvent e) -> {
             String username = newUsername.getText();
             String password = newUserPassword.getText();
-            
+
             if (username.length() < 4) {
                 userCreationMessage.setText("Username is too short!");
             }
@@ -148,12 +150,84 @@ public class GUI extends Application {
                 userCreationMessage.setTextFill(Color.RED);
             }
         });
-        
+
         newUserPane.getChildren().addAll(createNewUserLabel, userCreationMessage, newUsernamePane, newUserPasswordPane, createNewUserButton);
-        
+
         newUserScene = new Scene(newUserPane, 750, 500);
 
-        // Setup the primary stage and scene
+        /* Setup the main scene */
+        VBox mainScenePane = new VBox(10);
+        mainScenePane.setPadding(new Insets(10));
+
+        HBox menuPane = new HBox(10);
+        Region menuSpacer = new Region();
+        HBox.setHgrow(menuSpacer, Priority.ALWAYS);
+        Button logoutButton = new Button("Logout");
+
+        menuPane.getChildren().addAll(menuLabel, menuSpacer, logoutButton);
+
+        logoutButton.setOnAction(e -> {
+            recipebook.logout();
+            primaryStage.setScene(loginScene);
+        });
+
+        Label searchRecipeLabel = new Label("Search a recipe by name.");
+        Label searchRecipeNameLabel = new Label("Recipe name: ");
+        VBox searchRecipePane = new VBox(10);
+        searchRecipePane.setPadding(new Insets(10));
+        Button searchRecipeButton = new Button("Search");
+        TextField searchRecipeName = new TextField();
+        searchRecipeName.prefWidth(50);
+
+        searchRecipeButton.setOnAction(e -> {
+
+        });
+
+        searchRecipePane.getChildren().addAll(searchRecipeLabel, searchRecipeName, searchRecipeButton);
+
+        Button changeToAddRecipeSceneButton = new Button("Add a recipe");
+
+        changeToAddRecipeSceneButton.setOnAction(e -> {
+            primaryStage.setScene(addRecipeScene);
+        });
+
+        mainScenePane.getChildren().addAll(menuPane, searchRecipePane, changeToAddRecipeSceneButton);
+
+        mainScene = new Scene(mainScenePane, 750, 500);
+
+        /* Setup the scene for adding a new recipe */
+        VBox addNewRecipeScenePane = new VBox(10);
+        addNewRecipeScenePane.setPadding(new Insets(10));
+
+        HBox menuPaneNewRecipe = new HBox(10);
+        Region menuSpacerNewRecipe = new Region();
+        HBox.setHgrow(menuSpacerNewRecipe, Priority.ALWAYS);
+        Button backButton = new Button("Back");
+        Button newRecipeSceneLogoutButton = new Button("Logout");
+
+        backButton.setOnAction(e -> {
+            primaryStage.setScene(mainScene);
+        });
+
+        newRecipeSceneLogoutButton.setOnAction(e -> {
+            recipebook.logout();
+            primaryStage.setScene(loginScene);
+        });
+
+        menuPaneNewRecipe.getChildren().addAll(menuSpacerNewRecipe, backButton, newRecipeSceneLogoutButton);
+
+        HBox addNewRecipePane = new HBox(10);
+        Label newRecipeNameLable = new Label("Recipe name");
+        TextField newRecipeName = new TextField();
+        Button addNewRecipeButton = new Button("Add");
+
+        addNewRecipePane.getChildren().addAll(newRecipeNameLable, newRecipeName, addNewRecipeButton);
+
+        addNewRecipeScenePane.getChildren().addAll(menuPaneNewRecipe, addNewRecipePane);
+
+        addRecipeScene = new Scene(addNewRecipeScenePane, 750, 500);
+
+        /* Setup the primary stage and scene */
         primaryStage.setTitle("Recipebook");
         primaryStage.setScene(loginScene);
         primaryStage.show();

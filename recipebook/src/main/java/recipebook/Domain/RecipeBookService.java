@@ -6,7 +6,6 @@
 package recipebook.Domain;
 
 import java.sql.SQLException;
-import recipebook.Dao.Database;
 import recipebook.Dao.RecipeDao;
 import recipebook.Dao.UserDao;
 
@@ -68,11 +67,18 @@ public class RecipeBookService {
      *
      * @param path the path of the database file from the config file
      */
-    public void connectToDatabase(String path) {
+    public boolean connectToDatabase(String path) {
 
-        Database database = new Database();
+        DatabaseService database = new DatabaseService();
 
         database.createDatabase(path);
+
+        try {
+            userDao.fetchUsers();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
 
     }
 
@@ -95,6 +101,10 @@ public class RecipeBookService {
         }
 
         return false;
+    }
+
+    public void logout() {
+        loggedIn = null;
     }
 
     public User getLoggedUser() {

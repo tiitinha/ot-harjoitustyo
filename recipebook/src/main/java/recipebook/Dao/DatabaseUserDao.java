@@ -38,7 +38,9 @@ public class DatabaseUserDao implements UserDao {
      * @throws java.lang.Exception if other than SQLException, the exception is
      * thrown
      */
-    public boolean getUsersFromDatabase() throws Exception {
+
+    @Override
+    public boolean fetchUsers() throws Exception {
         try {
             try (Connection db = DriverManager.getConnection("jdbc:h2:" + database, "admin", "")) {
                 PreparedStatement stmt = db.prepareStatement("SELECT * FROM User;");

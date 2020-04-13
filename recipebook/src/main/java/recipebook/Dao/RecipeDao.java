@@ -15,10 +15,12 @@ import recipebook.Domain.User;
  */
 public interface RecipeDao {
     
-    Recipe addRecipe(User user, String name) throws Exception;
+    boolean addRecipe(User user, String name) throws Exception;
     
     Recipe fetchRecipe(String name);
     
     List<Recipe> getAll();
+    
+    List<Recipe> getUsersRecipes(User user);
     
 }

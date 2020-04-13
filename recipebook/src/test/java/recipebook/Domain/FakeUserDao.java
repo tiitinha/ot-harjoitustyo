@@ -21,6 +21,8 @@ public class FakeUserDao implements UserDao {
         users = new ArrayList<>();
     }
 
+
+    
     @Override
     public User createUser(User user) {
         users.add(user);
@@ -35,6 +37,11 @@ public class FakeUserDao implements UserDao {
     @Override
     public List<User> getAllUsers() {
         return users;
+    }
+
+    @Override
+    public boolean fetchUsers() {
+        return true;
     }
     
 }
