@@ -7,6 +7,7 @@ package recipebook.Domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import recipebook.Dao.RecipeDao;
 
 /**
@@ -22,10 +23,10 @@ public class FakeRecipeDao implements RecipeDao {
     }
 
     @Override
-    public Recipe addRecipe(User user, String name) throws Exception {
-        Recipe recipe = new Recipe(name);
+    public boolean addRecipe(User user, String name) throws Exception {
+        Recipe recipe = new Recipe(name, user);
         recipes.add(recipe);
-        return recipe;
+        return true;
     }
 
     @Override
@@ -36,6 +37,11 @@ public class FakeRecipeDao implements RecipeDao {
     @Override
     public List<Recipe> getAll() {
         return recipes;
+    }
+
+    @Override
+    public List<Recipe> getUsersRecipes(User user) {
+        return recipes.stream().filter(r -> r.getAuthor().equals(user)).collect(Collectors.toList());
     }
     
 }

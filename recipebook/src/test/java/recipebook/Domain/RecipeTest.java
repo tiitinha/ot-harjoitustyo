@@ -20,7 +20,8 @@ public class RecipeTest {
 
     @Before
     public void setUp() {
-        recipe = new Recipe("omlette");
+        User user = new User("test", "salasana");
+        recipe = new Recipe("omlette", user);
     }
 
     @Test

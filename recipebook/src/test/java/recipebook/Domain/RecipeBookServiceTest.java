@@ -5,6 +5,8 @@
  */
 package recipebook.Domain;
 
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,13 +20,14 @@ public class RecipeBookServiceTest {
     private RecipeBookService recipebook;
     private FakeUserDao userDao;
     private FakeRecipeDao recipeDao;
+    private User user1;
     
     @Before
     public void SetUp() {
         userDao = new FakeUserDao();
         recipeDao = new FakeRecipeDao();
         
-        User user1 = new User("Testi", "salasana");
+        user1 = new User("Testi", "salasana");
         userDao.createUser(user1);
         
         recipebook = new RecipeBookService(recipeDao, userDao);
@@ -32,7 +35,29 @@ public class RecipeBookServiceTest {
     
     @Test
     public void creatingNewRecipeReturnsTrue() {
-        assertTrue(recipebook.createNewRecipe("resepti"));
+        assertTrue(recipebook.createNewRecipe("resepti", user1));
     }
+    
+    @Test
+    public void loginReturnsTrueIfUserExists() {
+        assertTrue(recipebook.login("Testi", "salasana"));
+    }
+    
+    @Test
+    public void loginReturnsFalseIfUserDoesntExist() {
+        assertFalse(recipebook.login("Testi2", "salasana"));
+    }
+    
+    @Test
+    public void getLoggedUserReturnsTheCorrectUser() {
+        recipebook.login("Testi", "salasana");
+        assertEquals(user1, recipebook.getLoggedUser());
+    }
+    
+    @Test
+    public void createUserReturnsTrueIfLegitNameAndPassword() {
+        assertTrue(recipebook.createUser("test2", "salasana"));
+    }
+    
     
 }

@@ -15,10 +15,12 @@ public class Recipe implements Comparable<Recipe> {
 
     private String name;
     private HashMap<String, Ingredient> ingredients;
+    private User author;
 
-    public Recipe(String name) {
+    public Recipe(String name, User author) {
         this.name = name;
         this.ingredients = new HashMap<>();
+        this.author = author;
     }
 
     /**
@@ -62,4 +64,9 @@ public class Recipe implements Comparable<Recipe> {
         return name.equals(other.name);
     }
 
+    public User getAuthor() {
+        return author;
+    }
+
+    
 }

@@ -10,4 +10,7 @@
 | 5.4.  | 5    | h2:n tutustiminen, tiedon tallentamiseen sekä sen lukemiseen vaadittavan koodin kirjoittaminen sekä testit tietokantaluokalle |
 | 6.4.  | 1    | GUI:n työstäminen |
 | 7.4.  | 2    | Käyttäjänluomisominaisuuden työstäminen |
-| yht   | 17.5 | |
+| 9.4.  | 2    | GUI:n työstmäinen eteen päin |
+| 13.4. | 1.5  | Reseptinlisäysominaisuuden työstäminen GUI:n |
+| 14.4. | 2.5    | Reseptinlisäysominaisuuden työstäminen sovelluslogiikkaan sekä sovelluslogiikan testien kirjoittaminen | 
+| yht   | 23.5 | |

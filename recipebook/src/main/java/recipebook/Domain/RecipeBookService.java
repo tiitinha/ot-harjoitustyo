@@ -29,8 +29,8 @@ public class RecipeBookService {
      * @param name the name of the new recipe
      * @return true, if creating the recipe succeeds, otherwise false
      */
-    public boolean createNewRecipe(String name) {
-        Recipe recipe = new Recipe(name);
+    public boolean createNewRecipe(String name, User user) {
+        Recipe recipe = new Recipe(name, user);
 
         return true;
         /*
@@ -111,7 +111,7 @@ public class RecipeBookService {
         return loggedIn;
     }
 
-    public boolean creteUser(String username, String password) {
+    public boolean createUser(String username, String password) {
         try {
             User user = new User(username, password);
             User returnUser = userDao.createUser(user);

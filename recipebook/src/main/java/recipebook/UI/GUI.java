@@ -37,6 +37,7 @@ public class GUI extends Application {
     private Scene newUserScene;
     private Scene mainScene;
     private Scene addRecipeScene;
+    private Scene ingredientScene;
 
     private Label menuLabel = new Label();
 
@@ -53,7 +54,7 @@ public class GUI extends Application {
 
         UserDao userDao = new DatabaseUserDao(databaseFile);
         RecipeDao recipeDao = new DatabaseRecipeDao(databaseFile, userDao);
-        
+
         recipebook = new RecipeBookService(recipeDao, userDao);
         recipebook.connectToDatabase(databaseFile);
     }
@@ -138,7 +139,7 @@ public class GUI extends Application {
             }
             if (password.length() < 6) {
                 userCreationMessage.setText("Password too short!");
-            } else if (recipebook.creteUser(username, password)) {
+            } else if (recipebook.createUser(username, password)) {
                 userCreationMessage.setText("");
                 newUsername.setText("");
                 newUserPassword.setText("");
@@ -174,16 +175,18 @@ public class GUI extends Application {
         Label searchRecipeLabel = new Label("Search a recipe by name.");
         Label searchRecipeNameLabel = new Label("Recipe name: ");
         VBox searchRecipePane = new VBox(10);
-        searchRecipePane.setPadding(new Insets(10));
+        HBox searchRecipeNamePane = new HBox(10);
         Button searchRecipeButton = new Button("Search");
         TextField searchRecipeName = new TextField();
         searchRecipeName.prefWidth(50);
+
+        searchRecipeNamePane.getChildren().addAll(searchRecipeNameLabel, searchRecipeName);
 
         searchRecipeButton.setOnAction(e -> {
 
         });
 
-        searchRecipePane.getChildren().addAll(searchRecipeLabel, searchRecipeName, searchRecipeButton);
+        searchRecipePane.getChildren().addAll(searchRecipeLabel, searchRecipeNamePane, searchRecipeButton);
 
         Button changeToAddRecipeSceneButton = new Button("Add a recipe");
 
@@ -219,13 +222,67 @@ public class GUI extends Application {
         HBox addNewRecipePane = new HBox(10);
         Label newRecipeNameLable = new Label("Recipe name");
         TextField newRecipeName = new TextField();
-        Button addNewRecipeButton = new Button("Add");
+        Button addNewRecipeButton = new Button("Add a new recipe");
+
+        addNewRecipeButton.setOnAction(e -> {
+            primaryStage.setScene(ingredientScene);
+        });
 
         addNewRecipePane.getChildren().addAll(newRecipeNameLable, newRecipeName, addNewRecipeButton);
 
         addNewRecipeScenePane.getChildren().addAll(menuPaneNewRecipe, addNewRecipePane);
 
         addRecipeScene = new Scene(addNewRecipeScenePane, 750, 500);
+
+        /* Setup for stage for adding ingredients to a recipe */
+        HBox menuPaneNewIngredient = new HBox(10);
+        Region menuSpacerNewIngredient = new Region();
+        HBox.setHgrow(menuSpacerNewIngredient, Priority.ALWAYS);
+        Button backButtonNewIngredient = new Button("Back");
+        Button newIngredientSceneLogoutButton = new Button("Logout");
+
+        backButtonNewIngredient.setOnAction(e -> {
+            primaryStage.setScene(mainScene);
+        });
+
+        newIngredientSceneLogoutButton.setOnAction(e -> {
+            recipebook.logout();
+            primaryStage.setScene(loginScene);
+        });
+
+        menuPaneNewIngredient.getChildren().addAll(menuSpacerNewRecipe, backButton, newRecipeSceneLogoutButton);
+        
+        HBox ingredientNamePane = new HBox(10);
+        HBox ingredientAmountPane = new HBox(10);
+        HBox ingredientUnitPane = new HBox(10);
+        VBox ingredientPane = new VBox(10);
+        
+        ingredientPane.setPadding(new Insets(10));
+        
+        Label ingredientInfo = new Label("Add a new ingredient to the recipe by pressing \"Add ingredient\"");
+        
+        Label ingredientNameLabel = new Label("Ingredient name");
+        TextField ingredientName = new TextField();
+        
+        Label ingredientAmountLabel = new Label("Amount");
+        TextField ingredientAmount = new TextField();
+        
+        Label ingredientUnitLabel = new Label("Unit");
+        TextField ingredientUnit = new TextField();
+        
+        Button addIngredientButton = new Button("Add ingredient");
+
+        ingredientNamePane.getChildren().addAll(ingredientNameLabel, ingredientName);
+        ingredientAmountPane.getChildren().addAll(ingredientAmountLabel, ingredientAmount);
+        ingredientUnitPane.getChildren().addAll(ingredientUnitLabel, ingredientUnit);
+
+        addIngredientButton.setOnAction(e -> {
+
+        });
+
+        ingredientPane.getChildren().addAll(menuPaneNewIngredient, ingredientInfo, ingredientNamePane, ingredientAmountPane, ingredientUnitPane, addIngredientButton);
+
+        ingredientScene = new Scene(ingredientPane, 750, 500);
 
         /* Setup the primary stage and scene */
         primaryStage.setTitle("Recipebook");

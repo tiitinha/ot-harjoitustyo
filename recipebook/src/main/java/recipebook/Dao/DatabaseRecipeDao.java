@@ -6,6 +6,7 @@
 package recipebook.Dao;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import recipebook.Domain.Recipe;
 import recipebook.Domain.User;
 ;
@@ -31,17 +32,17 @@ public class DatabaseRecipeDao implements RecipeDao {
 
     @Override
     public Recipe fetchRecipe(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return recipes.stream().filter(r -> r.getName().equals(name)).findFirst().orElse(null);
     }
 
     @Override
     public List<Recipe> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return recipes;
     }
 
     @Override
     public List<Recipe> getUsersRecipes(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return recipes.stream().filter(r -> r.getAuthor().equals(user)).collect(Collectors.toList());
     }
     
 }
