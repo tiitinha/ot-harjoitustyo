@@ -259,7 +259,7 @@ public class GUI extends Application {
         
         ingredientPane.setPadding(new Insets(10));
         
-        Label ingredientInfo = new Label("Add a new ingredient to the recipe by pressing 'Add ingredient'. When ready, click 'Save' to save the recipe");
+        Label ingredientInfo = new Label("Add a new ingredient to the recipe by pressing 'Add ingredient'. When ready, click 'Save' to save the recipe.");
         
         Label ingredientNameLabel = new Label("Ingredient name");
         TextField ingredientName = new TextField();

@@ -12,5 +12,5 @@
 | 7.4.  | 2    | Käyttäjänluomisominaisuuden työstäminen |
 | 9.4.  | 2    | GUI:n työstmäinen eteen päin |
 | 13.4. | 1.5  | Reseptinlisäysominaisuuden työstäminen GUI:n |
-| 14.4. | 2.5    | Reseptinlisäysominaisuuden työstäminen sovelluslogiikkaan sekä sovelluslogiikan testien kirjoittaminen | 
-| yht   | 23.5 | |
+| 14.4. | 3    | Reseptinlisäysominaisuuden työstäminen sovelluslogiikkaan sekä sovelluslogiikan testien kirjoittaminen | 
+| yht   | 24 | |
