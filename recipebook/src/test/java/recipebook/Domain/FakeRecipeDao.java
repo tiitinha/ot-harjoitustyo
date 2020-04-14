@@ -23,8 +23,7 @@ public class FakeRecipeDao implements RecipeDao {
     }
 
     @Override
-    public boolean addRecipe(User user, String name) throws Exception {
-        Recipe recipe = new Recipe(name, user);
+    public boolean addRecipe(User user, Recipe recipe) throws Exception {
         recipes.add(recipe);
         return true;
     }

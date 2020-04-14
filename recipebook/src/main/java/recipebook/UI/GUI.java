@@ -259,7 +259,7 @@ public class GUI extends Application {
         
         ingredientPane.setPadding(new Insets(10));
         
-        Label ingredientInfo = new Label("Add a new ingredient to the recipe by pressing \"Add ingredient\"");
+        Label ingredientInfo = new Label("Add a new ingredient to the recipe by pressing 'Add ingredient'. When ready, click 'Save' to save the recipe");
         
         Label ingredientNameLabel = new Label("Ingredient name");
         TextField ingredientName = new TextField();
@@ -279,8 +279,14 @@ public class GUI extends Application {
         addIngredientButton.setOnAction(e -> {
 
         });
+        
+        Button saveRecipeToDatabaseButton = new Button("Save recipe");
+        
+        saveRecipeToDatabaseButton.setOnAction(e -> {
+            
+        });
 
-        ingredientPane.getChildren().addAll(menuPaneNewIngredient, ingredientInfo, ingredientNamePane, ingredientAmountPane, ingredientUnitPane, addIngredientButton);
+        ingredientPane.getChildren().addAll(menuPaneNewIngredient, ingredientInfo, ingredientNamePane, ingredientAmountPane, ingredientUnitPane, addIngredientButton, saveRecipeToDatabaseButton);
 
         ingredientScene = new Scene(ingredientPane, 750, 500);
 

@@ -32,12 +32,7 @@ public class RecipeBookServiceTest {
         
         recipebook = new RecipeBookService(recipeDao, userDao);
     }
-    
-    @Test
-    public void creatingNewRecipeReturnsTrue() {
-        assertTrue(recipebook.createNewRecipe("resepti", user1));
-    }
-    
+       
     @Test
     public void loginReturnsTrueIfUserExists() {
         assertTrue(recipebook.login("Testi", "salasana"));

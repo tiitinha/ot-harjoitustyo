@@ -27,38 +27,23 @@ public class RecipeBookService {
     /**
      *
      * @param name the name of the new recipe
+     * @param user the user who is adding the recipe
      * @return true, if creating the recipe succeeds, otherwise false
      */
-    public boolean createNewRecipe(String name, User user) {
+    public Recipe createNewRecipe(String name, User user) {
         Recipe recipe = new Recipe(name, user);
-
-        return true;
-        /*
-        try {
-
-        } catch (Exception ex) {
-            return false;
-        }
-        return true;*/
+        return recipe;
     }
 
     /**
      *
-     * @param recipeName the name of the recipe to which the ingredient is added
+     * @param recipe the recipe to which the ingredient is added
      * @param name the name of the ingredient
      * @param amount the amount of the ingredient
      * @param unit the unit of the ingredient
-     * @return false, if adding the ingredient doesn't succeed, otherwise true
      */
-    public boolean addIngredient(String recipeName, String name, int amount, String unit) {
-
-        try {
-            return true;
-            /*recipe.addIngredient(name, amount, unit);*/
-        } catch (Exception ex) {
-            return false;
-        }
-
+    public void addIngredient(Recipe recipe, String name, int amount, String unit) {
+        recipe.addIngredient(name, amount, unit);
     }
 
     /**

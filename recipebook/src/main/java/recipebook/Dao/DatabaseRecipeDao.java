@@ -26,8 +26,13 @@ public class DatabaseRecipeDao implements RecipeDao {
     }
 
     @Override
-    public boolean addRecipe(User user, String name) throws Exception {
-        return false;
+    public boolean addRecipe(User user, Recipe recipe) throws Exception {
+        try {
+            recipes.add(recipe);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
