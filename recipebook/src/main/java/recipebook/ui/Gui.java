@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package recipebook.UI;
+package recipebook.ui;
 
 import java.io.FileInputStream;
 import java.util.Properties;
@@ -20,17 +20,17 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import recipebook.Dao.DatabaseRecipeDao;
-import recipebook.Dao.DatabaseUserDao;
-import recipebook.Dao.RecipeDao;
-import recipebook.Dao.UserDao;
-import recipebook.Domain.RecipeBookService;
+import recipebook.dao.DatabaseRecipeDao;
+import recipebook.dao.DatabaseUserDao;
+import recipebook.dao.RecipeDao;
+import recipebook.dao.UserDao;
+import recipebook.domain.RecipeBookService;
 
 /**
  *
  * @author tiitinha
  */
-public class GUI extends Application {
+public class Gui extends Application {
 
     private RecipeBookService recipebook;
     private Scene loginScene;

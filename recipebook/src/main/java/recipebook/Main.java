@@ -5,7 +5,7 @@
  */
 package recipebook;
 
-import recipebook.UI.GUI;
+import recipebook.ui.Gui;
 
 /**
  *
@@ -14,7 +14,7 @@ import recipebook.UI.GUI;
 public class Main {
     
     public static void main(String[] args) {
-        GUI.main(args);
+        Gui.main(args);
     }
     
 }

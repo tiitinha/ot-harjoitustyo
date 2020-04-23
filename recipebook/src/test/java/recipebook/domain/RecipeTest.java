@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package recipebook.Domain;
+package recipebook.domain;
 
+import recipebook.domain.Ingredient;
+import recipebook.domain.Recipe;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 import org.junit.Before;
@@ -25,18 +27,24 @@ public class RecipeTest {
 
     @Test
     public void addingNewIngredientReturnsTrue() {
-        assertTrue(recipe.addIngredient("egg", 1, "pcs"));
+        Ingredient ingredient = new Ingredient("egg", 1, "pcs");
+        assertTrue(recipe.addIngredient(ingredient));
     }
     
     @Test
     public void addingDuplicateIngredientReturnsFalse() {
-        recipe.addIngredient("egg", 1, "pcs");
-        assertFalse(recipe.addIngredient("egg", 1, "pcs"));
+        Ingredient ingredient = new Ingredient("egg", 1, "pcs");
+        Ingredient ingredient2 = new Ingredient("egg", 1, "pcs");
+        
+        recipe.addIngredient(ingredient);
+        assertFalse(recipe.addIngredient(ingredient2));
     }
     
     @Test
     public void addingIgredientAddsIngredientToIngredientList() {
-        recipe.addIngredient("egg", 1, "pcs");
+        Ingredient ingredient = new Ingredient("egg", 1, "pcs");;
+        
+        recipe.addIngredient(ingredient);
         assertTrue(recipe.getIngredients().containsKey("egg"));
     }
 

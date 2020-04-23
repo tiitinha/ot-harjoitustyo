@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package recipebook.Domain;
+package recipebook.domain;
 
 import java.util.HashMap;
 
@@ -26,16 +26,14 @@ public class Recipe implements Comparable<Recipe> {
     /**
      * Method is used to add a new ingredient to a recipe.
      *
-     * @param ingredient the name of the ingredient
-     * @param amount the amount of the ingredient
-     * @param unit the unit of the amount
+     * @param ingredient the ingredient instance to be added to the recipe
      * @return true if the ingredient doesn't exist yet, otherwise false
      */
-    public boolean addIngredient(String ingredient, int amount, String unit) {
-        if (ingredients.containsKey(ingredient)) {
+    public boolean addIngredient(Ingredient ingredient) {
+        if (ingredients.containsKey(ingredient.getName())) {
             return false;
         } else {
-            ingredients.put(ingredient, new Ingredient(ingredient, amount, unit));
+            ingredients.put(ingredient.getName(), ingredient);
             return true;
         }
     }
@@ -68,5 +66,4 @@ public class Recipe implements Comparable<Recipe> {
         return author;
     }
 
-    
 }

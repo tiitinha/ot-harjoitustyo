@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package recipebook.Domain;
+package recipebook.domain;
 
 import java.sql.SQLException;
-import recipebook.Dao.RecipeDao;
-import recipebook.Dao.UserDao;
+import recipebook.dao.RecipeDao;
+import recipebook.dao.UserDao;
 
 /**
  *
@@ -43,7 +43,8 @@ public class RecipeBookService {
      * @param unit the unit of the ingredient
      */
     public void addIngredient(Recipe recipe, String name, int amount, String unit) {
-        recipe.addIngredient(name, amount, unit);
+        Ingredient ingredient = new Ingredient(name, amount, unit);
+        recipe.addIngredient(ingredient);
     }
 
     /**

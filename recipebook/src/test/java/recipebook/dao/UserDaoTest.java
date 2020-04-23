@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package recipebook.Dao;
+package recipebook.dao;
 
-import recipebook.Domain.DatabaseService;
+import recipebook.dao.UserDao;
+import recipebook.dao.DatabaseUserDao;
+import recipebook.domain.DatabaseService;
 import java.util.List;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
-import recipebook.Domain.User;
+import recipebook.domain.User;
 
 /**
  *

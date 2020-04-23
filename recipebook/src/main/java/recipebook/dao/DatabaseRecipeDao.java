@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package recipebook.Dao;
+package recipebook.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,8 +14,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import recipebook.Domain.Recipe;
-import recipebook.Domain.User;
+import recipebook.domain.Ingredient;
+import recipebook.domain.Recipe;
+import recipebook.domain.User;
 
 ;
 
@@ -35,8 +36,19 @@ public class DatabaseRecipeDao implements RecipeDao {
         recipes = new ArrayList();
     }
 
+    /**
+     * 
+     * @param recipe the recipe to be added to the database
+     * @return returns false if the adding fails either due to exception or recipe already exists, otherwise true
+     * @throws Exception
+     */
     @Override
     public boolean addRecipe(Recipe recipe) throws Exception {
+        
+        if (recipes.contains(recipe)) {
+            return false;
+        }
+        
         try {
 
             Connection db = DriverManager.getConnection("jdbc:h2:" + database, "admin", "");
@@ -46,17 +58,58 @@ public class DatabaseRecipeDao implements RecipeDao {
             stmtUser.setString(1, recipe.getAuthor());
             ResultSet rs = stmtUser.executeQuery();
 
-            String userId = rs.getString("id");
+            int userId = rs.getInt("id");
 
             PreparedStatement stmt = db.prepareStatement("INSERT INTO Recipe (name, createUserId) VALUES (?, ?);");
             stmt.setString(1, recipe.getName());
-            stmt.setString(2, userId);
+            stmt.setInt(2, userId);
 
             stmt.executeUpdate();
             stmt.close();
             db.close();
 
             recipes.add(recipe);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /**
+     * 
+     * @param ingredient the ingredient to be added to a recipe and database
+     * @param recipeName the name of the recipe to which the ingredient is added
+     * @return 
+     */
+    public boolean addIngredient(Ingredient ingredient, String recipeName) {
+        if (fetchRecipe(recipeName) == null) {
+            return false;
+        }
+        
+        Recipe recipe = fetchRecipe(recipeName);
+        recipe.addIngredient(ingredient);
+        
+        try {
+
+            Connection db = DriverManager.getConnection("jdbc:h2:" + database, "admin", "");
+            Statement s = db.createStatement();
+
+            PreparedStatement stmtUser = db.prepareStatement("SELECT IDENTITY() FROM Recipe WHERE name = ?");
+            stmtUser.setString(1, recipeName);
+            ResultSet rs = stmtUser.executeQuery();
+            
+            int recipeId = rs.getInt("id");
+            
+            PreparedStatement stmt = db.prepareStatement("INSERT INTO Ingredient (recipeId, name, amount, unit) VALUES (?, ?, ?), ?");
+            stmt.setInt(1, recipeId);
+            stmt.setString(2, ingredient.getName());
+            stmt.setInt(3, ingredient.getAmount());
+            stmt.setString(4, ingredient.getUnit());
+            
+            stmt.executeUpdate();
+            stmt.close();
+            db.close();
+
             return true;
         } catch (Exception e) {
             return false;

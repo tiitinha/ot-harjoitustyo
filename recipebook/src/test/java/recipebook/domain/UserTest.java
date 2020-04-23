@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package recipebook.Domain;
+package recipebook.domain;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
-import recipebook.Domain.User;
+import recipebook.domain.User;
 
 /**
  *

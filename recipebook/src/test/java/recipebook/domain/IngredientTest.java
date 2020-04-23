@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package recipebook.Domain;
+package recipebook.domain;
 
 import static junit.framework.Assert.assertEquals;
 import org.junit.Test;
-import recipebook.Domain.Ingredient;
+import recipebook.domain.Ingredient;
 
 /**
  *

@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package recipebook.Dao;
+package recipebook.dao;
 
 import java.util.List;
-import recipebook.Domain.Recipe;
-import recipebook.Domain.User;
+import recipebook.domain.Recipe;
+import recipebook.domain.User;
 
 /**
  *
