@@ -15,7 +15,7 @@ import recipebook.Domain.User;
  */
 public interface RecipeDao {
     
-    boolean addRecipe(User user, Recipe recipe) throws Exception;
+    boolean addRecipe(Recipe recipe) throws Exception;
     
     Recipe fetchRecipe(String name);
     

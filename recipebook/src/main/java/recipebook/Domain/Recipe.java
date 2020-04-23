@@ -15,9 +15,9 @@ public class Recipe implements Comparable<Recipe> {
 
     private String name;
     private HashMap<String, Ingredient> ingredients;
-    private User author;
+    private String author;
 
-    public Recipe(String name, User author) {
+    public Recipe(String name, String author) {
         this.name = name;
         this.ingredients = new HashMap<>();
         this.author = author;
@@ -55,7 +55,7 @@ public class Recipe implements Comparable<Recipe> {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof User)) {
+        if (!(obj instanceof Recipe)) {
             return false;
         }
 
@@ -64,7 +64,7 @@ public class Recipe implements Comparable<Recipe> {
         return name.equals(other.name);
     }
 
-    public User getAuthor() {
+    public String getAuthor() {
         return author;
     }
 

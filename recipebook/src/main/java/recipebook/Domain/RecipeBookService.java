@@ -30,7 +30,7 @@ public class RecipeBookService {
      * @param user the user who is adding the recipe
      * @return true, if creating the recipe succeeds, otherwise false
      */
-    public Recipe createNewRecipe(String name, User user) {
+    public Recipe createNewRecipe(String name, String user) {
         Recipe recipe = new Recipe(name, user);
         return recipe;
     }
