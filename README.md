@@ -13,6 +13,9 @@ Sovelluksen avulla käyttäjät voivat koota reseptikirjaa (lisätä uusia resep
 
 [Työaikakirjanpito](https://github.com/afroseppo/ot-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
 
+## Releaset
+
+
 ## Komentorivitoiminnot
 
 ### Testaus
@@ -23,3 +26,21 @@ Testikattavuusraportti luodaan komennolla
 ```mvn jacoco:report```
 
 Kattavuusraporttia voi luonnin jälkeen tarkastella tiedostosta target/site/jacoco/index.html avaamalla tiedoston selaimella.
+
+### Suoritettavan jarin generointi
+
+Suoritettavan jarin voi luoda komennolla
+```mvn package```
+hakemistoon target. Komento generoi jar-tiedoston recipebook-1.0-SNAPSHOT.jar
+
+### JavaDoc
+JavaDoc generoidaan komennolla
+```mvn javadoc:javadoc```
+
+JavaDocia pääsee tarkastelemaan avaamalla tiedoston target/site/apidocs/index.html
+
+### Checkstyle
+Tiedostossa [checkstyle.xml](https://github.com/afroseppo/ot-harjoitustyo/blob/master/recipebook/checkstyle.xml) määritellyt tarkistukset voi suorittaa komennolla 
+```mvn jxr:jxr checkstyle:checkstyle```
+
+Virheilmoitukset voi tarkastaa avaamalla tiedoston target/site/checkstyle.html
