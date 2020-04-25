@@ -52,6 +52,7 @@ public class RecipeBookService {
      * a new database
      *
      * @param path the path of the database file from the config file
+     * @return returns true, if connection successful, otherwise false
      */
     public boolean connectToDatabase(String path) {
 
@@ -97,6 +98,12 @@ public class RecipeBookService {
         return loggedIn;
     }
 
+    /**
+     * 
+     * @param username username for the new user
+     * @param password password for the new user
+     * @return returns false, if creating the user fails, otherwise true
+     */
     public boolean createUser(String username, String password) {
         try {
             User user = new User(username, password);
@@ -104,8 +111,6 @@ public class RecipeBookService {
             if (returnUser != null) {
                 return true;
             }
-        } catch (SQLException e) {
-            System.out.println("RUNTIME ERROR");
         } catch (Exception e) {
             return false;
         }

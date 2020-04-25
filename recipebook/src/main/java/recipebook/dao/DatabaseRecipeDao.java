@@ -155,7 +155,7 @@ public class DatabaseRecipeDao implements RecipeDao {
 
     @Override
     public List<Recipe> getUsersRecipes(User user) {
-        return recipes.stream().filter(r -> r.getAuthor().equals(user)).collect(Collectors.toList());
+        return recipes.stream().filter(r -> r.getAuthor().equals(user.getName())).collect(Collectors.toList());
     }
 
 }

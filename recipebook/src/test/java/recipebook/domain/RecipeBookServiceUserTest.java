@@ -17,7 +17,7 @@ import org.junit.Test;
  *
  * @author tiitinha
  */
-public class RecipeBookServiceTest {
+public class RecipeBookServiceUserTest {
     
     private RecipeBookService recipebook;
     private FakeUserDao userDao;

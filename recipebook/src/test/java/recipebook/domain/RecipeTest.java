@@ -5,8 +5,6 @@
  */
 package recipebook.domain;
 
-import recipebook.domain.Ingredient;
-import recipebook.domain.Recipe;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 import org.junit.Before;
@@ -46,6 +44,12 @@ public class RecipeTest {
         
         recipe.addIngredient(ingredient);
         assertTrue(recipe.getIngredients().containsKey("egg"));
+    }
+    
+    @Test
+    public void equalsReturnsTrueWithSameRecipeName() {
+        Recipe newRecipe = new Recipe("omlette", "test");
+        assertTrue(recipe.equals(newRecipe));
     }
 
 }
