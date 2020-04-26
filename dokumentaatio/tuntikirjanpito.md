@@ -16,5 +16,5 @@
 | 21.4. | 0.5  | Sovelluslogiikan työstäminen |
 | 24.4 | 1 | Reseptinlisäysominaisuuden työstäminen, testien työstäminen ja korjailu |
 | 25.4 | 2 | Reseptinlisäysominaisuuden työstäminen, JAR:n luomisen mahdollistaminen, JavaDoc, checkstylen korjaukset |
-| 26.4 | 3 | Reseptinlisäysominaisuuden työstäminen GUI ja sovelluslogiikkaan, JAR:n luomisen mahdollistaminen, koodin siivoilu | 
-| yht   | 30.5 | |
+| 26.4 | 4 | Reseptinlisäysominaisuuden työstäminen GUI ja sovelluslogiikkaan, JAR:n luomisen mahdollistaminen, koodin siivoilu | 
+| yht   | 31.5 | |
