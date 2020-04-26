@@ -25,7 +25,8 @@ public class FakeRecipeDao implements RecipeDao {
     }
 
     @Override
-    public boolean addRecipe(Recipe recipe) throws Exception {
+    public boolean addRecipe(String name, String user) throws Exception {
+        Recipe recipe = new Recipe(name, user);
         recipes.add(recipe);
         return true;
     }
@@ -43,6 +44,12 @@ public class FakeRecipeDao implements RecipeDao {
     @Override
     public List<Recipe> getUsersRecipes(String username) {
         return recipes.stream().filter(r -> r.getAuthor().equals(username)).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean addIngredient(Ingredient ingredient, String recipeName) throws Exception {
+        fetchRecipe(recipeName).addIngredient(ingredient);
+        return true;
     }
     
 }

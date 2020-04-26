@@ -5,6 +5,7 @@
  */
 package recipebook.domain;
 
+import static junit.framework.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,14 +35,8 @@ public class RecipeBookServiceRecipeTest {
     
     @Test
     public void addingAnIngredientAddsIngredientToARecipe() {
-        Recipe recipe = new Recipe("omlette", "user");
-        recipebook.addIngredient(recipe, "egg", 1, "pcs");
-        
-        recipebook.
+        recipebook.createNewRecipe("omlette", "test");
+        recipebook.addIngredient("omlette", "egg", 1, "pcs");
+        assertTrue(recipebook.fetchRecipe("omlette").getIngredients().containsKey("egg"));
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }

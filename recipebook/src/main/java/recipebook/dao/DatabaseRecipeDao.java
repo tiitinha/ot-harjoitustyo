@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -16,7 +17,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import recipebook.domain.Ingredient;
 import recipebook.domain.Recipe;
-import recipebook.domain.User;
 
 ;
 
@@ -37,81 +37,92 @@ public class DatabaseRecipeDao implements RecipeDao {
     }
 
     /**
-     * 
-     * @param recipe the recipe to be added to the database
-     * @return returns false if the adding fails either due to exception or recipe already exists, otherwise true
+     *
+     * @param name name of the recipe
+     * @param author username of the recipe author
+     * @return returns false if the adding fails either due to exception or
+     * recipe already exists, otherwise true
      * @throws Exception
      */
     @Override
-    public boolean addRecipe(Recipe recipe) throws Exception {
-        
+    public boolean addRecipe(String name, String authorName) throws Exception {
+
+        Recipe recipe = new Recipe(name, authorName);
+
         if (recipes.contains(recipe)) {
             return false;
         }
-        
+
         try {
-
             Connection db = DriverManager.getConnection("jdbc:h2:" + database, "admin", "");
-            Statement s = db.createStatement();
 
-            PreparedStatement stmtUser = db.prepareStatement("SELECT IDENTITY() FROM User WHERE name = ?");
-            stmtUser.setString(1, recipe.getAuthor());
+            PreparedStatement stmtUser = db.prepareStatement("SELECT id, name FROM User WHERE name = ?");
+            stmtUser.setString(1, authorName);
             ResultSet rs = stmtUser.executeQuery();
 
-            int userId = rs.getInt("id");
+            if (rs.next()) {
+                int userId = Integer.parseInt(rs.getString(1));
 
-            PreparedStatement stmt = db.prepareStatement("INSERT INTO Recipe (name, createUserId) VALUES (?, ?);");
-            stmt.setString(1, recipe.getName());
-            stmt.setInt(2, userId);
+                PreparedStatement stmt = db.prepareStatement("INSERT INTO Recipe (name, createUserId) VALUES (?, ?);");
+                stmt.setString(1, name);
+                stmt.setInt(2, userId);
 
-            stmt.executeUpdate();
-            stmt.close();
-            db.close();
+                stmt.executeUpdate();
+                stmt.close();
+                db.close();
 
-            recipes.add(recipe);
-            return true;
-        } catch (Exception e) {
+                recipes.add(recipe);
+                return true;
+            }
+            return false;
+
+        } catch (NumberFormatException | SQLException e) {
+            System.out.println(e.getMessage());
             return false;
         }
     }
 
     /**
-     * 
+     *
      * @param ingredient the ingredient to be added to a recipe and database
      * @param recipeName the name of the recipe to which the ingredient is added
-     * @return 
+     * @return
      */
+    @Override
     public boolean addIngredient(Ingredient ingredient, String recipeName) {
         if (fetchRecipe(recipeName) == null) {
             return false;
         }
-        
+
         Recipe recipe = fetchRecipe(recipeName);
-        recipe.addIngredient(ingredient);
-        
+
         try {
 
             Connection db = DriverManager.getConnection("jdbc:h2:" + database, "admin", "");
-            Statement s = db.createStatement();
 
-            PreparedStatement stmtUser = db.prepareStatement("SELECT IDENTITY() FROM Recipe WHERE name = ?");
+            PreparedStatement stmtUser = db.prepareStatement("SELECT id FROM Recipe WHERE name = ?");
             stmtUser.setString(1, recipeName);
             ResultSet rs = stmtUser.executeQuery();
-            
-            int recipeId = rs.getInt("id");
-            
-            PreparedStatement stmt = db.prepareStatement("INSERT INTO Ingredient (recipeId, name, amount, unit) VALUES (?, ?, ?), ?");
-            stmt.setInt(1, recipeId);
-            stmt.setString(2, ingredient.getName());
-            stmt.setInt(3, ingredient.getAmount());
-            stmt.setString(4, ingredient.getUnit());
-            
-            stmt.executeUpdate();
-            stmt.close();
-            db.close();
 
-            return true;
-        } catch (Exception e) {
+            if (rs.next()) {
+                int recipeId = Integer.parseInt(rs.getString(1));
+
+                PreparedStatement stmt = db.prepareStatement("INSERT INTO Ingredient (recipeId, name, amount, unit) VALUES (?, ?, ?), ?");
+                stmt.setInt(1, recipeId);
+                stmt.setString(2, ingredient.getName());
+                stmt.setInt(3, ingredient.getAmount());
+                stmt.setString(4, ingredient.getUnit());
+
+                stmt.executeUpdate();
+                stmt.close();
+                db.close();
+
+                recipe.addIngredient(ingredient);
+                return true;
+            }
+            return false;
+        } catch (NumberFormatException | SQLException e) {
+            e.printStackTrace();
             return false;
         }
     }

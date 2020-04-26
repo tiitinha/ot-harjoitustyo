@@ -30,9 +30,13 @@ public class RecipeBookService {
      * @param user the user who is adding the recipe
      * @return true, if creating the recipe succeeds, otherwise false
      */
-    public Recipe createNewRecipe(String name, String user) {
-        Recipe recipe = new Recipe(name, user);
-        return recipe;
+    public boolean createNewRecipe(String name, String user) {
+        try {
+            recipeDao.addRecipe(name, user);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /**
@@ -41,11 +45,18 @@ public class RecipeBookService {
      * @param name the name of the ingredient
      * @param amount the amount of the ingredient
      * @param unit the unit of the ingredient
+     * @return true, if adding successful, otherwise false
      */
-    public void addIngredient(String recipeName, String name, int amount, String unit) {
-        Recipe recipe = fetchRecipe(recipeName);
-        Ingredient ingredient = new Ingredient(name, amount, unit);
-        recipe.addIngredient(ingredient);
+    public boolean addIngredient(String recipeName, String name, int amount, String unit) {
+        try {
+            Recipe recipe = fetchRecipe(recipeName);
+            Ingredient ingredient = new Ingredient(name, amount, unit);
+            recipe.addIngredient(ingredient);
+            recipeDao.addIngredient(ingredient, recipeName);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /**
@@ -100,7 +111,7 @@ public class RecipeBookService {
     }
 
     /**
-     * 
+     *
      * @param username username for the new user
      * @param password password for the new user
      * @return returns false, if creating the user fails, otherwise true
@@ -118,11 +129,11 @@ public class RecipeBookService {
 
         return false;
     }
-    
+
     public Recipe fetchRecipe(String name) {
         return recipeDao.fetchRecipe(name);
     }
-    
+
     public List<Recipe> getUsersRecipe(String username) {
         return recipeDao.getUsersRecipes(username);
     }

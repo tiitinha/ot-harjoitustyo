@@ -33,8 +33,9 @@ import recipebook.domain.RecipeBookService;
 public class Gui extends Application {
 
     private RecipeBookService recipebook;
-    private Scene loginScene, newUserScene, mainScene, addRecipeScene, ingredientScene;
+    private Scene loginScene, newUserScene, mainScene, addRecipeScene, ingredientScene, recipeSearchScene;
     private String recipeName;
+    private String searchFieldRecipeName;
     private Label menuLabel = new Label();
 
     @Override
@@ -105,6 +106,18 @@ public class Gui extends Application {
         loginScene = new Scene(loginPane, 750, 500);
 
         /* Setup for creation of a new user */
+        HBox menuPaneNewUser = new HBox(10);
+        menuPaneNewUser.setPadding(new Insets(10));
+        Region menuSpacerNewUser = new Region();
+        HBox.setHgrow(menuSpacerNewUser, Priority.ALWAYS);
+        Button backButtonCreateUser = new Button("Back");
+
+        backButtonCreateUser.setOnAction(e -> {
+            primaryStage.setScene(loginScene);
+        });
+
+        menuPaneNewUser.getChildren().addAll(menuSpacerNewUser, backButtonCreateUser);
+
         Label createNewUserLabel = new Label("The username must be at least 3 characters long and the password 5.");
         VBox newUserPane = new VBox(10);
         HBox newUsernamePane = new HBox(10);
@@ -148,7 +161,7 @@ public class Gui extends Application {
             }
         });
 
-        newUserPane.getChildren().addAll(createNewUserLabel, userCreationMessage, newUsernamePane, newUserPasswordPane, createNewUserButton);
+        newUserPane.getChildren().addAll(menuPaneNewUser, createNewUserLabel, userCreationMessage, newUsernamePane, newUserPasswordPane, createNewUserButton);
 
         newUserScene = new Scene(newUserPane, 750, 500);
 
@@ -179,7 +192,8 @@ public class Gui extends Application {
         searchRecipeNamePane.getChildren().addAll(searchRecipeNameLabel, searchRecipeName);
 
         searchRecipeButton.setOnAction(e -> {
-
+            searchFieldRecipeName = searchRecipeName.getText();
+            primaryStage.setScene(recipeSearchScene);
         });
 
         searchRecipePane.getChildren().addAll(searchRecipeLabel, searchRecipeNamePane, searchRecipeButton);
@@ -193,6 +207,10 @@ public class Gui extends Application {
         mainScenePane.getChildren().addAll(menuPane, searchRecipePane, changeToAddRecipeSceneButton);
 
         mainScene = new Scene(mainScenePane, 750, 500);
+        
+        /* Setup the scene for serach results */
+        
+        
 
         /* Setup the scene for adding a new recipe */
         VBox addNewRecipeScenePane = new VBox(10);
@@ -220,9 +238,9 @@ public class Gui extends Application {
         TextField newRecipeName = new TextField();
         Button addNewRecipeButton = new Button("Add a new recipe");
 
-        recipeName = newRecipeName.getText();
-
         addNewRecipeButton.setOnAction(e -> {
+            recipeName = newRecipeName.getText();
+            recipebook.createNewRecipe(newRecipeName.getText(), recipebook.getLoggedUser().getName());
             primaryStage.setScene(ingredientScene);
         });
 
@@ -279,7 +297,8 @@ public class Gui extends Application {
         ingredientUnitPane.getChildren().addAll(ingredientUnitLabel, ingredientUnit);
 
         addIngredientButton.setOnAction(e -> {
-            if (ingredientAmount.getText().matches("-?\\d+(\\.\\d+)?")) {
+            System.out.println(recipeName);
+            if (ingredientAmount.getText().matches("-?\\d+(\\.\\d+)?") && !recipeName.isEmpty()) {
                 recipebook.addIngredient(recipeName, ingredientName.getText(), Integer.parseInt(ingredientAmount.getText()), ingredientUnit.getText());
             } else {
                 Label ingredientAmountNotNumeric = new Label("Ingredient amount is not a number!");

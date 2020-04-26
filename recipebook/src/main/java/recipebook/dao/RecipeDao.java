@@ -6,6 +6,7 @@
 package recipebook.dao;
 
 import java.util.List;
+import recipebook.domain.Ingredient;
 import recipebook.domain.Recipe;
 import recipebook.domain.User;
 
@@ -15,7 +16,9 @@ import recipebook.domain.User;
  */
 public interface RecipeDao {
     
-    boolean addRecipe(Recipe recipe) throws Exception;
+    boolean addRecipe(String name, String author) throws Exception;
+    
+    boolean addIngredient(Ingredient ingredient, String recipeName) throws Exception;
     
     Recipe fetchRecipe(String name);
     
