@@ -39,7 +39,7 @@ public class DatabaseRecipeDao implements RecipeDao {
     /**
      *
      * @param name name of the recipe
-     * @param author username of the recipe author
+     * @param authorName the name of the author of the recipe
      * @return returns false if the adding fails either due to exception or
      * recipe already exists, otherwise true
      * @throws Exception
@@ -107,7 +107,7 @@ public class DatabaseRecipeDao implements RecipeDao {
             if (rs.next()) {
                 int recipeId = Integer.parseInt(rs.getString(1));
 
-                PreparedStatement stmt = db.prepareStatement("INSERT INTO Ingredient (recipeId, name, amount, unit) VALUES (?, ?, ?), ?");
+                PreparedStatement stmt = db.prepareStatement("INSERT INTO Ingredient (recipeId, name, amount, unit) VALUES (?, ?, ?, ?)");
                 stmt.setInt(1, recipeId);
                 stmt.setString(2, ingredient.getName());
                 stmt.setInt(3, ingredient.getAmount());

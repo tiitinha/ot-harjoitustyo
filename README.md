@@ -15,6 +15,7 @@ Sovelluksen avulla käyttäjät voivat koota reseptikirjaa (lisätä uusia resep
 
 ## Releaset
 
+Viikko 6
 
 ## Komentorivitoiminnot
 
@@ -31,7 +32,7 @@ Kattavuusraporttia voi luonnin jälkeen tarkastella tiedostosta target/site/jaco
 
 Suoritettavan jarin voi luoda komennolla
 ```mvn package```
-hakemistoon target. Komento generoi jar-tiedoston recipebook-1.0-SNAPSHOT.jar
+hakemistoon target. Komento generoi jar-tiedoston recipebook-1.0-SNAPSHOT.jar. Hakemistossa tulee olla config.properties -tiedosto.
 
 ### JavaDoc
 JavaDoc generoidaan komennolla

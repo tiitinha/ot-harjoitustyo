@@ -13,6 +13,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -72,7 +73,7 @@ public class Gui extends Application {
         Label passwordLabel = new Label("Password");
         Label welcomeLabel = new Label("Welcome to the Recipebook! The app is currently under construction");
         TextField usernameInput = new TextField();
-        TextField usernamePassword = new TextField();
+        PasswordField usernamePassword = new PasswordField();
 
         inputPane.getChildren().addAll(loginLabel, usernameInput, passwordLabel, usernamePassword);
         welcomePane.getChildren().add(welcomeLabel);
@@ -89,15 +90,19 @@ public class Gui extends Application {
             if (recipebook.login(username, password)) {
                 loginMessage.setText("");
                 primaryStage.setScene(mainScene);
-                usernameInput.setText("");
+                usernameInput.clear();
             } else {
                 loginMessage.setText("Invalid username or password!");
                 loginMessage.setTextFill(Color.RED);
             }
+
+            usernameInput.clear();
+            usernamePassword.clear();
         });
 
         createButton.setOnAction(e -> {
-            usernameInput.setText("");
+            usernameInput.clear();
+            usernamePassword.clear();
             primaryStage.setScene(newUserScene);
         });
 
@@ -130,7 +135,7 @@ public class Gui extends Application {
 
         HBox newUserPasswordPane = new HBox(10);
         newUserPasswordPane.setPadding(new Insets(10));
-        TextField newUserPassword = new TextField();
+        PasswordField newUserPassword = new PasswordField();
         Label newUserPasswordLabel = new Label("Password");
         newUserPasswordLabel.setPrefWidth(150);
         newUserPasswordPane.getChildren().addAll(newUserPasswordLabel, newUserPassword);
@@ -145,6 +150,8 @@ public class Gui extends Application {
 
             if (username.length() < 4) {
                 userCreationMessage.setText("Username is too short!");
+            } else if (!username.matches("[a-zA-Z0-9]")) {
+                userCreationMessage.setText("Invalid username, only letters and numbers allowed!");
             }
             if (password.length() < 6) {
                 userCreationMessage.setText("Password too short!");
@@ -160,6 +167,9 @@ public class Gui extends Application {
                 userCreationMessage.setTextFill(Color.RED);
             }
         });
+
+        newUsername.clear();
+        newUserPassword.clear();
 
         newUserPane.getChildren().addAll(menuPaneNewUser, createNewUserLabel, userCreationMessage, newUsernamePane, newUserPasswordPane, createNewUserButton);
 
@@ -201,16 +211,16 @@ public class Gui extends Application {
         Button changeToAddRecipeSceneButton = new Button("Add a recipe");
 
         changeToAddRecipeSceneButton.setOnAction(e -> {
+            searchRecipeName.clear();
             primaryStage.setScene(addRecipeScene);
         });
 
         mainScenePane.getChildren().addAll(menuPane, searchRecipePane, changeToAddRecipeSceneButton);
 
         mainScene = new Scene(mainScenePane, 750, 500);
-        
+
         /* Setup the scene for serach results */
-        
-        
+        VBox searchResultPane = new VBox(10);
 
         /* Setup the scene for adding a new recipe */
         VBox addNewRecipeScenePane = new VBox(10);
@@ -239,9 +249,11 @@ public class Gui extends Application {
         Button addNewRecipeButton = new Button("Add a new recipe");
 
         addNewRecipeButton.setOnAction(e -> {
+
             recipeName = newRecipeName.getText();
             recipebook.createNewRecipe(newRecipeName.getText(), recipebook.getLoggedUser().getName());
             primaryStage.setScene(ingredientScene);
+            newRecipeName.clear();
         });
 
         addNewRecipePane.getChildren().addAll(newRecipeNameLabel, newRecipeName, addNewRecipeButton);
@@ -300,6 +312,10 @@ public class Gui extends Application {
             System.out.println(recipeName);
             if (ingredientAmount.getText().matches("-?\\d+(\\.\\d+)?") && !recipeName.isEmpty()) {
                 recipebook.addIngredient(recipeName, ingredientName.getText(), Integer.parseInt(ingredientAmount.getText()), ingredientUnit.getText());
+
+                ingredientName.clear();
+                ingredientAmount.clear();
+                ingredientUnit.clear();
             } else {
                 Label ingredientAmountNotNumeric = new Label("Ingredient amount is not a number!");
                 ingredientPane.getChildren().add(ingredientAmountNotNumeric);
