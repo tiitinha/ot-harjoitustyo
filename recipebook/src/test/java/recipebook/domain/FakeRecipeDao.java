@@ -41,8 +41,8 @@ public class FakeRecipeDao implements RecipeDao {
     }
 
     @Override
-    public List<Recipe> getUsersRecipes(User user) {
-        return recipes.stream().filter(r -> r.getAuthor().equals(user.getName())).collect(Collectors.toList());
+    public List<Recipe> getUsersRecipes(String username) {
+        return recipes.stream().filter(r -> r.getAuthor().equals(username)).collect(Collectors.toList());
     }
     
 }

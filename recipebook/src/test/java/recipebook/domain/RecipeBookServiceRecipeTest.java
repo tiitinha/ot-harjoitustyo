@@ -6,6 +6,7 @@
 package recipebook.domain;
 
 import org.junit.Before;
+import org.junit.Test;
 
 /**
  *
@@ -30,6 +31,14 @@ public class RecipeBookServiceRecipeTest {
         recipebook = new RecipeBookService(recipeDao, userDao);
     }
 
+    
+    @Test
+    public void addingAnIngredientAddsIngredientToARecipe() {
+        Recipe recipe = new Recipe("omlette", "user");
+        recipebook.addIngredient(recipe, "egg", 1, "pcs");
+        
+        recipebook.
+    }
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //

@@ -21,6 +21,6 @@ public interface RecipeDao {
     
     List<Recipe> getAll();
     
-    List<Recipe> getUsersRecipes(User user);
+    List<Recipe> getUsersRecipes(String username);
     
 }

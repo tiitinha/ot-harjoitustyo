@@ -33,12 +33,8 @@ import recipebook.domain.RecipeBookService;
 public class Gui extends Application {
 
     private RecipeBookService recipebook;
-    private Scene loginScene;
-    private Scene newUserScene;
-    private Scene mainScene;
-    private Scene addRecipeScene;
-    private Scene ingredientScene;
-
+    private Scene loginScene, newUserScene, mainScene, addRecipeScene, ingredientScene;
+    private String recipeName;
     private Label menuLabel = new Label();
 
     @Override
@@ -220,15 +216,17 @@ public class Gui extends Application {
         menuPaneNewRecipe.getChildren().addAll(menuSpacerNewRecipe, backButton, newRecipeSceneLogoutButton);
 
         HBox addNewRecipePane = new HBox(10);
-        Label newRecipeNameLable = new Label("Recipe name");
+        Label newRecipeNameLabel = new Label("Recipe name");
         TextField newRecipeName = new TextField();
         Button addNewRecipeButton = new Button("Add a new recipe");
+
+        recipeName = newRecipeName.getText();
 
         addNewRecipeButton.setOnAction(e -> {
             primaryStage.setScene(ingredientScene);
         });
 
-        addNewRecipePane.getChildren().addAll(newRecipeNameLable, newRecipeName, addNewRecipeButton);
+        addNewRecipePane.getChildren().addAll(newRecipeNameLabel, newRecipeName, addNewRecipeButton);
 
         addNewRecipeScenePane.getChildren().addAll(menuPaneNewRecipe, addNewRecipePane);
 
@@ -251,25 +249,29 @@ public class Gui extends Application {
         });
 
         menuPaneNewIngredient.getChildren().addAll(menuSpacerNewRecipe, backButton, newRecipeSceneLogoutButton);
-        
+
+        HBox ingredientRecipeNamePane = new HBox(10);
+        Label ingredientRecipeName = new Label(recipeName);
+        ingredientRecipeNamePane.getChildren().add(ingredientRecipeName);
+
         HBox ingredientNamePane = new HBox(10);
         HBox ingredientAmountPane = new HBox(10);
         HBox ingredientUnitPane = new HBox(10);
         VBox ingredientPane = new VBox(10);
-        
+
         ingredientPane.setPadding(new Insets(10));
-        
+
         Label ingredientInfo = new Label("Add a new ingredient to the recipe by pressing 'Add ingredient'. When ready, click 'Save' to save the recipe.");
-        
+
         Label ingredientNameLabel = new Label("Ingredient name");
         TextField ingredientName = new TextField();
-        
+
         Label ingredientAmountLabel = new Label("Amount");
         TextField ingredientAmount = new TextField();
-        
+
         Label ingredientUnitLabel = new Label("Unit");
         TextField ingredientUnit = new TextField();
-        
+
         Button addIngredientButton = new Button("Add ingredient");
 
         ingredientNamePane.getChildren().addAll(ingredientNameLabel, ingredientName);
@@ -277,16 +279,21 @@ public class Gui extends Application {
         ingredientUnitPane.getChildren().addAll(ingredientUnitLabel, ingredientUnit);
 
         addIngredientButton.setOnAction(e -> {
-
+            if (ingredientAmount.getText().matches("-?\\d+(\\.\\d+)?")) {
+                recipebook.addIngredient(recipeName, ingredientName.getText(), Integer.parseInt(ingredientAmount.getText()), ingredientUnit.getText());
+            } else {
+                Label ingredientAmountNotNumeric = new Label("Ingredient amount is not a number!");
+                ingredientPane.getChildren().add(ingredientAmountNotNumeric);
+            }
         });
-        
+
         Button saveRecipeToDatabaseButton = new Button("Save recipe");
-        
+
         saveRecipeToDatabaseButton.setOnAction(e -> {
-            
+
         });
 
-        ingredientPane.getChildren().addAll(menuPaneNewIngredient, ingredientInfo, ingredientNamePane, ingredientAmountPane, ingredientUnitPane, addIngredientButton, saveRecipeToDatabaseButton);
+        ingredientPane.getChildren().addAll(ingredientRecipeNamePane, menuPaneNewIngredient, ingredientInfo, ingredientNamePane, ingredientAmountPane, ingredientUnitPane, addIngredientButton, saveRecipeToDatabaseButton);
 
         ingredientScene = new Scene(ingredientPane, 750, 500);
 

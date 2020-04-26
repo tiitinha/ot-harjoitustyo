@@ -5,7 +5,7 @@
  */
 package recipebook.domain;
 
-import java.sql.SQLException;
+import java.util.List;
 import recipebook.dao.RecipeDao;
 import recipebook.dao.UserDao;
 
@@ -37,12 +37,13 @@ public class RecipeBookService {
 
     /**
      *
-     * @param recipe the recipe to which the ingredient is added
+     * @param recipeName the name of the recipe to which the ingredient is added
      * @param name the name of the ingredient
      * @param amount the amount of the ingredient
      * @param unit the unit of the ingredient
      */
-    public void addIngredient(Recipe recipe, String name, int amount, String unit) {
+    public void addIngredient(String recipeName, String name, int amount, String unit) {
+        Recipe recipe = fetchRecipe(recipeName);
         Ingredient ingredient = new Ingredient(name, amount, unit);
         recipe.addIngredient(ingredient);
     }
@@ -116,6 +117,14 @@ public class RecipeBookService {
         }
 
         return false;
+    }
+    
+    public Recipe fetchRecipe(String name) {
+        return recipeDao.fetchRecipe(name);
+    }
+    
+    public List<Recipe> getUsersRecipe(String username) {
+        return recipeDao.getUsersRecipes(username);
     }
 
 }

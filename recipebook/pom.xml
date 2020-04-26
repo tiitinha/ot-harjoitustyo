@@ -36,6 +36,14 @@
     </dependencies>
     
     <build>
+        <resources>
+            <resource>
+                <directory>/</directory>
+                <includes>
+                    <include>config.properties</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -67,20 +75,19 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.2</version>
+                <version>1.6</version>
                 <executions>
                     <execution>
+                        <phase>package</phase>
                         <goals>
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <transformer
-                                implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-                                <resource>META-INF/services/java.sql.Driver</resource>
-                            </transformer>
-                            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                <mainClass>recipebook.Main</mainClass>
-                            </transformer>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>recipebook.Main</mainClass>
+                                </transformer>
+                            </transformers>
                         </configuration>
                     </execution>
                 </executions>
@@ -92,7 +99,7 @@
                 <version>0.8.5</version>
                 <configuration>
                     <excludes>
-                        <exclude>todoapp/ui/**/*</exclude>
+                        <exclude>recipebook/ui/**/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
