@@ -26,6 +26,7 @@ public class FakeUserDao implements UserDao {
     
     @Override
     public boolean createUser(User user) {
+        users.add(user);
         return true;
     }
 

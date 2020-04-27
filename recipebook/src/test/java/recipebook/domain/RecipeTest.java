@@ -40,7 +40,7 @@ public class RecipeTest {
     
     @Test
     public void addingIgredientAddsIngredientToIngredientList() {
-        Ingredient ingredient = new Ingredient("egg", 1, "pcs");;
+        Ingredient ingredient = new Ingredient("egg", 1, "pcs");
         
         recipe.addIngredient(ingredient);
         assertTrue(recipe.getIngredients().containsKey("egg"));

@@ -6,5 +6,4 @@
 
 <suppressions>
     <suppress files="recipebook.UI.GUI.java" checks="[a-zA-Z0-9]*"/>
-    <suppress files="recipebook.UI.TextUI.java" checks="[a-zA-Z0-9]*"/>
 </suppressions>

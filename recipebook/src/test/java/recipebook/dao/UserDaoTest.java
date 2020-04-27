@@ -31,11 +31,11 @@ public class UserDaoTest {
         db = new DatabaseService();
         path = "./src/test/resources/database";
         db.createDatabase(path);
-        UserDao dao = new DatabaseUserDao(path);
+        dao = new DatabaseUserDao(path);
     }
     
     @Test
-    public void createUserReturnsCorrectUser() {
+    public void createUserReturnsTrueIfCreationSuccessful() {
         User user = new User("testi", "123");
         assertTrue(dao.createUser(user));
     }
