@@ -9,9 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,7 +28,7 @@ public class DatabaseRecipeDao implements RecipeDao {
     private UserDao users;
     private List<Recipe> recipes;
 
-    public DatabaseRecipeDao(String database, UserDao users) throws Exception {
+    public DatabaseRecipeDao(String database, UserDao users) {
         this.database = database;
         this.users = users;
         recipes = new ArrayList();
@@ -42,10 +40,9 @@ public class DatabaseRecipeDao implements RecipeDao {
      * @param authorName the name of the author of the recipe
      * @return returns false if the adding fails either due to exception or
      * recipe already exists, otherwise true
-     * @throws Exception
      */
     @Override
-    public boolean addRecipe(String name, String authorName) throws Exception {
+    public boolean addRecipe(String name, String authorName) {
 
         Recipe recipe = new Recipe(name, authorName);
 
@@ -122,11 +119,14 @@ public class DatabaseRecipeDao implements RecipeDao {
             }
             return false;
         } catch (NumberFormatException | SQLException e) {
-            e.printStackTrace();
             return false;
         }
     }
 
+    /**
+     * fetches all recipes from the database and adds them to the object variable recipes
+     * @return true, if database query is successful, otherwise false
+     */
     public boolean fetchAllRecipes() {
         try {
             try (Connection db = DriverManager.getConnection("jdbc:h2:" + database, "admin", "")) {
@@ -154,6 +154,11 @@ public class DatabaseRecipeDao implements RecipeDao {
         return true;
     }
 
+    /**
+     * 
+     * @param name name of the recipe to be fetched
+     * @return Recipe object, if the recipe exists, otherwise null
+     */
     @Override
     public Recipe fetchRecipe(String name) {
         return recipes.stream().filter(r -> r.getName().equals(name)).findFirst().orElse(null);

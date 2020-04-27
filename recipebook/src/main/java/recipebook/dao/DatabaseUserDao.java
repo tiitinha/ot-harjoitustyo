@@ -35,12 +35,9 @@ public class DatabaseUserDao implements UserDao {
      *
      * @return returns true, if connection to database successful, otherwise
      * false
-     * @throws java.lang.Exception if other than SQLException, the exception is
-     * thrown
      */
-
     @Override
-    public boolean fetchUsers() throws Exception {
+    public boolean fetchUsers() {
         try {
             try (Connection db = DriverManager.getConnection("jdbc:h2:" + database, "admin", "")) {
                 PreparedStatement stmt = db.prepareStatement("SELECT * FROM User;");
@@ -55,11 +52,8 @@ public class DatabaseUserDao implements UserDao {
                 stmt.close();
                 db.close();
             }
-
         } catch (SQLException e) {
             return false;
-        } catch (Exception e) {
-            throw e;
         }
 
         return true;
@@ -68,11 +62,10 @@ public class DatabaseUserDao implements UserDao {
     /**
      *
      * @param user an instance of User class
-     * @return
-     * @throws java.sql.SQLException
+     * @return true, if user creation successful, otherwise false
      */
     @Override
-    public User createUser(User user) throws SQLException {
+    public boolean createUser(User user) {
         if (!users.contains(user)) {
             try {
                 Connection db = DriverManager.getConnection("jdbc:h2:" + database, "admin", "");
@@ -89,14 +82,18 @@ public class DatabaseUserDao implements UserDao {
                 users.add(user);
 
             } catch (SQLException e) {
-                System.out.println(e.fillInStackTrace());
-                throw e;
+                return false;
             }
-            return user;
+            return true;
         }
-        return null;
+        return false;
     }
 
+    /**
+     * 
+     * @param username
+     * @return User object, if user exists, otherwise null
+     */
     @Override
     public User findByUserName(String username) {
         return users.stream()

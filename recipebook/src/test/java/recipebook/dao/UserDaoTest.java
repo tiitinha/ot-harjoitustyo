@@ -23,6 +23,7 @@ public class UserDaoTest {
     
     private DatabaseService db;
     private String path;
+    private UserDao dao;
 
     
     @Before
@@ -34,18 +35,15 @@ public class UserDaoTest {
     }
     
     @Test
-    public void createUserReturnsCorrectUser() throws Exception {
+    public void createUserReturnsCorrectUser() {
         User user = new User("testi", "123");
-        UserDao dao = new DatabaseUserDao(path);
-        var returnUser = dao.createUser(user);
-        assertEquals("testi", returnUser.getName());
+        assertTrue(dao.createUser(user));
     }
     
     @Test
-    public void getAllUsersReturnsAListWithCorrectSize() throws Exception {
+    public void getAllUsersReturnsAListWithCorrectSize() {
         User user1 = new User("testi", "123");
         User user2 = new User("testi2", "1234");
-        UserDao dao = new DatabaseUserDao(path);
         dao.createUser(user1);
         dao.createUser(user2);
         
@@ -57,7 +55,6 @@ public class UserDaoTest {
     @Test
     public void findByUsernameReturnsUserWithCorrectName() throws Exception {
         User user = new User("testiuser", "123");
-        UserDao dao = new DatabaseUserDao(path);
         dao.createUser(user);
         
         User returnUser = dao.findByUserName("testiuser");

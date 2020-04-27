@@ -18,7 +18,7 @@ public class RecipeBookServiceRecipeTest {
     private FakeUserDao userDao;
     private FakeRecipeDao recipeDao;
     private User user1;
-    private RecipeBookService recipebook;
+    private RecipebookService recipebook;
 
     @Before
     public void setUp() {
@@ -29,7 +29,7 @@ public class RecipeBookServiceRecipeTest {
         user1 = new User("Testi", "salasana");
         userDao.createUser(user1);
 
-        recipebook = new RecipeBookService(recipeDao, userDao);
+        recipebook = new RecipebookService(recipeDao, userDao);
     }
 
     

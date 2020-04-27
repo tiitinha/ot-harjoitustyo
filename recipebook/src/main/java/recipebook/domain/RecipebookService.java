@@ -13,13 +13,13 @@ import recipebook.dao.UserDao;
  *
  * @author tiitinha
  */
-public class RecipeBookService {
+public class RecipebookService {
 
     private RecipeDao recipeDao;
     private UserDao userDao;
     private User loggedIn;
 
-    public RecipeBookService(RecipeDao recipeDao, UserDao userDao) {
+    public RecipebookService(RecipeDao recipeDao, UserDao userDao) {
         this.recipeDao = recipeDao;
         this.userDao = userDao;
     }
@@ -117,17 +117,8 @@ public class RecipeBookService {
      * @return returns false, if creating the user fails, otherwise true
      */
     public boolean createUser(String username, String password) {
-        try {
             User user = new User(username, password);
-            User returnUser = userDao.createUser(user);
-            if (returnUser != null) {
-                return true;
-            }
-        } catch (Exception e) {
-            return false;
-        }
-
-        return false;
+            return userDao.createUser(user);
     }
 
     public Recipe fetchRecipe(String name) {

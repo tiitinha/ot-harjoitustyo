@@ -16,9 +16,9 @@ import recipebook.domain.User;
  */
 public interface RecipeDao {
     
-    boolean addRecipe(String name, String author) throws Exception;
+    boolean addRecipe(String name, String author);
     
-    boolean addIngredient(Ingredient ingredient, String recipeName) throws Exception;
+    boolean addIngredient(Ingredient ingredient, String recipeName);
     
     Recipe fetchRecipe(String name);
     

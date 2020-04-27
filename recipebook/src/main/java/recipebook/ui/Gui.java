@@ -25,7 +25,7 @@ import recipebook.dao.DatabaseRecipeDao;
 import recipebook.dao.DatabaseUserDao;
 import recipebook.dao.RecipeDao;
 import recipebook.dao.UserDao;
-import recipebook.domain.RecipeBookService;
+import recipebook.domain.RecipebookService;
 
 /**
  *
@@ -33,7 +33,7 @@ import recipebook.domain.RecipeBookService;
  */
 public class Gui extends Application {
 
-    private RecipeBookService recipebook;
+    private RecipebookService recipebook;
     private Scene loginScene, newUserScene, mainScene, addRecipeScene, ingredientScene, recipeSearchScene;
     private String recipeName;
     private String searchFieldRecipeName;
@@ -53,7 +53,7 @@ public class Gui extends Application {
         UserDao userDao = new DatabaseUserDao(databaseFile);
         RecipeDao recipeDao = new DatabaseRecipeDao(databaseFile, userDao);
 
-        recipebook = new RecipeBookService(recipeDao, userDao);
+        recipebook = new RecipebookService(recipeDao, userDao);
         recipebook.connectToDatabase(databaseFile);
     }
 

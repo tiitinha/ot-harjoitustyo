@@ -5,7 +5,7 @@
  */
 package recipebook.domain;
 
-import recipebook.domain.RecipeBookService;
+import recipebook.domain.RecipebookService;
 import recipebook.domain.User;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
@@ -19,7 +19,7 @@ import org.junit.Test;
  */
 public class RecipeBookServiceUserTest {
     
-    private RecipeBookService recipebook;
+    private RecipebookService recipebook;
     private FakeUserDao userDao;
     private FakeRecipeDao recipeDao;
     private User user1;
@@ -32,7 +32,7 @@ public class RecipeBookServiceUserTest {
         user1 = new User("Testi", "salasana");
         userDao.createUser(user1);
         
-        recipebook = new RecipeBookService(recipeDao, userDao);
+        recipebook = new RecipebookService(recipeDao, userDao);
     }
        
     @Test

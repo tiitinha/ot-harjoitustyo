@@ -1,3 +1,7 @@
+# Asennusohje
+
+Ohjelman suorittamista varten .jar tiedoston kanssa samassa polussa tulee olla config.properties -tiedosto, jossa on määritelty propertyt database (tietokannan nimi) ja databasePath (tietokannan sijainti, ./src/main/resources).
+
 # Käyttöohje
 
 ## Uuden käyttäjän luominen
@@ -14,6 +18,6 @@ Reseptikirjassa voi siirtyä reseptinluomisnäkymään painamalla nappia 'Add re
 
 ### Raaka-aineen lisääminen uuteen reseptiin
 
+Uuden reseptin luomisen jälkeen ohjelmassa voi syöttää reseptiin raaka-aineita. Raaka-aineen pystyy lisäämään napista 'Add ingredient'. Raaka-aineita ei voi lisätä repsetiin jälkikäteen.
+
 ## Reseptin hakeminen
-
-

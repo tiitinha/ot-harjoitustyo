@@ -25,9 +25,8 @@ public class FakeUserDao implements UserDao {
 
     
     @Override
-    public User createUser(User user) {
-        users.add(user);
-        return user;
+    public boolean createUser(User user) {
+        return true;
     }
 
     @Override

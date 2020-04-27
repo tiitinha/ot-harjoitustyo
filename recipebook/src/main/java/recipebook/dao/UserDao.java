@@ -14,9 +14,9 @@ import recipebook.domain.User;
  */
 public interface UserDao {
     
-    boolean fetchUsers() throws Exception;
+    boolean fetchUsers();
     
-    User createUser(User user) throws Exception;
+    boolean createUser(User user);
     
     User findByUserName(String username);
     

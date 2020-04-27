@@ -6,9 +6,7 @@ Sovelluksen tarkoitus on mahdollistaa käyttäjille syöttää uusia reseptejä 
 
 ## Käyttäjät
 
-Aluksi sovelluksessa on käyttäjäroolina ''normaali käyttäjä'', joka kykenee ainoastaan luomaan uusia reseptejä sekä poistamaan luomiaan reseptejä. Myöhemmin sovellukseen saatetaan lisätä ''pääkäyttäjä'', jolla on oikeus poistaa myös muiden lisäämiä reseptejä.
-
-## Käyttöliittymäluonnos
+Sovelluksessa on vain yksi käyttäjätyyppi. Sovelluksessa voi luoda uusia käyttäjiä ja käyttäjien tiedot tallennetaan tietokantaan.
 
 ## Toiminnallisuus
 
@@ -37,3 +35,5 @@ Aluksi sovelluksessa on käyttäjäroolina ''normaali käyttäjä'', joka kykene
 - kuvien lisääminen reseptiin
 - reseptien luokittelu eri kategorioihin (tagit)
 - reseptien selaaminen ja filtteröinti eri tekijöiden perusteella
+- useamman käyttäjätyypin luominen
+	- admin-käyttäjät voisivat esim. poistaa olemassa olevia reseptejä
