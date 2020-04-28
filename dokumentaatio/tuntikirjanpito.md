@@ -18,4 +18,5 @@
 | 25.4 | 2     | Reseptinlisäysominaisuuden työstäminen, JAR:n luomisen mahdollistaminen, JavaDoc, checkstylen korjaukset |
 | 26.4 | 4     | Reseptinlisäysominaisuuden työstäminen GUI ja sovelluslogiikkaan, JAR:n luomisen mahdollistaminen, koodin siivoilu | 
 | 27.4 | 2     | Koodin siistiminen, dokumentaation työstminen, JavaDocin korjailu ja siistiminen ym. |
-| yht   | 33.5 | |
+| 28.4 | 1     | Koodin siistimistä sekä dokumentaation työstämistä |
+| yht   | 34.5 | |
