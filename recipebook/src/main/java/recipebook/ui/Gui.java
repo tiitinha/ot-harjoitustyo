@@ -202,8 +202,8 @@ public class Gui extends Application {
         searchRecipeNamePane.getChildren().addAll(searchRecipeNameLabel, searchRecipeName);
 
         searchRecipeButton.setOnAction(e -> {
-            searchFieldRecipeName = searchRecipeName.getText();
-            primaryStage.setScene(recipeSearchScene);
+//            searchFieldRecipeName = searchRecipeName.getText();
+//            primaryStage.setScene(recipeSearchScene);
         });
 
         searchRecipePane.getChildren().addAll(searchRecipeLabel, searchRecipeNamePane, searchRecipeButton);
@@ -309,7 +309,6 @@ public class Gui extends Application {
         ingredientUnitPane.getChildren().addAll(ingredientUnitLabel, ingredientUnit);
 
         addIngredientButton.setOnAction(e -> {
-            System.out.println(recipeName);
             if (ingredientAmount.getText().matches("-?\\d+(\\.\\d+)?") && !recipeName.isEmpty()) {
                 recipebook.addIngredient(recipeName, ingredientName.getText(), Integer.parseInt(ingredientAmount.getText()), ingredientUnit.getText());
 

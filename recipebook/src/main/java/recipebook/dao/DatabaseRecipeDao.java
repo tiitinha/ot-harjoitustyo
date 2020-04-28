@@ -74,7 +74,6 @@ public class DatabaseRecipeDao implements RecipeDao {
             return false;
 
         } catch (NumberFormatException | SQLException e) {
-            System.out.println(e.getMessage());
             return false;
         }
     }
