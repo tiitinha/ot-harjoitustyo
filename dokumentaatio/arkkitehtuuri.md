@@ -2,7 +2,7 @@
 
 Ohjelman arkkitehtuuri on kolmikerroksinen ja perusrakenne koostuu kolmesta pakkauksesta: recipebook.ui, recipebook.domain ja recipebook.dao. Pakkaus recipebook.ui sisältää gravfisen käytöliittymän toetutuksen JafaFX:llä, recipebook.domin sisältää käyttöliittymäkoodin sekä ohjelman rakenteen kannalta tärkeät luokat ja recipebook.dao sisältää pysyväistallennuksesta vastavat luokat ja rajapinnat.
 
-# Käyttöliittymä
+## Käyttöliittymä
 
 Käyttöiittymä sisältää viisi erillistä näkymää:
 - kirjautuminen
@@ -16,7 +16,7 @@ Jokainen näkymä on toteutettu omana Scene-oliona ja yksi näkymä on kerrallaa
 
 Käyttöliittymä on eristetty sovelluslogiikasta ja kutsuu sovelluslogiikkaluokan 'RecipebookService' olion metodeja.
 
-# Sovelluslogiikka
+## Sovelluslogiikka
 
 Sovelluksen looginen datamalli muodostuu luokista User, Recipe ja Ingredient, jotka kuvaavat käyttäjiä, reseptejä sekä raaka-aineita. Luokkien väliset suhteet kuvattu alla:
 
@@ -29,22 +29,22 @@ Toiminnallisuudesta vastaa luokan RecipebookService olio, joka tarjoaa käyttöl
 
 RecipebookService pääsee käsittelemään käyttäjä-, resepti-, ja reseptin raaka-ainetietoja rajapintojen RecipeDao ja UserDao toteuttavien luokkien kautta.
 
-# Tietojen pysyväistallennus
+## Tietojen pysyväistallennus
 
 Pakkauksen recipebook.dao luokat DatabaseRecipeDao ja DatabaseUserDao käsittelevät tietojen tallentamisen h2-tietokantaan.
 
 Luokat on toteutettu Data Access Object -mallilla, joten ne on mahdollista korvata jollain muulla toteutusmenetelmällä, jos tieton tallennustapaa halutaan vaihtaa esimerkiksi tekstiteidostoon tai muuhun vastaavaan.
 
-## Tietokannat
+### Tietokannat
 
 Sovellus tallentaa käyttäjien, reseptien ja reseptiin kuuluvien raaka-aineiden tiedot erilliseen h2-tietokantaan. Sovelluksen juuressa on konfiguraatiotiedosto config.properties, joka määrittelee sekä tietokannan nimen, että tietokannan polun. Tietokantayhteyksiä käsitellään Javan java.sql-paketin avulla.
 
-# Ohjelman rakenteen puutteet
+## Ohjelman rakenteen puutteet
 
-## DAO-luokat
+### DAO-luokat
 
 Tietokannan datankäsittelyn DAO-luokkiin on jäänyt pituudeltaan pitkiä metodeita, joissa tehdään suoria tietokantahakuja sekä asetetaan tietokantaan dataa. Lisäksi luokissa on toisteista koodia, sillä tietokantaan tallentaminen sekä tietokannasta haku ovat jokaisella kerralla melko samankaltaisia.
 
-# Käyttöliittymä
+## Käyttöliittymä
 
 Käyttöliittymän toteutukse JavaFX:llä voisi korvata esim. FXML-määrittelyllä, jotta koodin selkeys lisääntyisi (suuri määrä sovelluslogiikkaa ja tapahtumakäsittelijöitä ja GUI-elementtejä sekaisin). Lisäksi käyttöliittymän visuaalinen ilme olisi vaivattomampi saada kuntoon FXLM-määrittelyllä (ilman ylimääräisiä rivejä koodia).
