@@ -125,7 +125,7 @@ public class RecipebookService {
         return recipeDao.fetchRecipe(name);
     }
 
-    public List<Recipe> getUsersRecipe(String username) {
+    public List<Recipe> getUsersRecipes(String username) {
         return recipeDao.getUsersRecipes(username);
     }
 
