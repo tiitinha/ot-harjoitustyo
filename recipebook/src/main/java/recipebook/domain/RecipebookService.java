@@ -25,7 +25,7 @@ public class RecipebookService {
     }
 
     /**
-     *
+     * Creates a new recipe by calling RecipeDao-method.
      * @param name the name of the new recipe
      * @param user the user who is adding the recipe
      * @return true, if creating the recipe succeeds, otherwise false
@@ -40,7 +40,7 @@ public class RecipebookService {
     }
 
     /**
-     *
+     * Adds a new ingredient to the recipe with the given name by calling RecipeDao-method.
      * @param recipeName the name of the recipe to which the ingredient is added
      * @param name the name of the ingredient
      * @param amount the amount of the ingredient
@@ -82,7 +82,7 @@ public class RecipebookService {
     }
 
     /**
-     *
+     * Method that assigns the user to be logged in, if the password and username are correct.
      * @param username username
      * @param password password
      * @return true, if the username exists in the database, false otherwise
@@ -111,7 +111,7 @@ public class RecipebookService {
     }
 
     /**
-     *
+     * Creates a new user by calling UserDao-method.
      * @param username username for the new user
      * @param password password for the new user
      * @return returns false, if creating the user fails, otherwise true

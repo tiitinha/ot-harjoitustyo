@@ -17,7 +17,7 @@ import java.sql.Statement;
 public class DatabaseService {
 
     /**
-     *
+     * Creates a new database file and tables, if they do not exist
      * @param path the path to database file
      * @return false if exception during creating the database, otherwise true
      */

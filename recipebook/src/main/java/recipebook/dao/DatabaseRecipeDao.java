@@ -35,7 +35,7 @@ public class DatabaseRecipeDao implements RecipeDao {
     }
 
     /**
-     *
+     * Adds a new recipe to the database, if the recipe doesn't already exist.
      * @param name name of the recipe
      * @param authorName the name of the author of the recipe
      * @return returns false if the adding fails either due to exception or
@@ -50,15 +50,11 @@ public class DatabaseRecipeDao implements RecipeDao {
             return false;
         }
 
-        try {
-            Connection db = DriverManager.getConnection("jdbc:h2:" + database, "admin", "");
+        int userId = getUserId(authorName);
+        if (userId > 0) {
 
-            PreparedStatement stmtUser = db.prepareStatement("SELECT id, name FROM User WHERE name = ?");
-            stmtUser.setString(1, authorName);
-            ResultSet rs = stmtUser.executeQuery();
-
-            if (rs.next()) {
-                int userId = Integer.parseInt(rs.getString(1));
+            try {
+                Connection db = DriverManager.getConnection("jdbc:h2:" + database, "admin", "");
 
                 PreparedStatement stmt = db.prepareStatement("INSERT INTO Recipe (name, createUserId) VALUES (?, ?);");
                 stmt.setString(1, name);
@@ -70,16 +66,16 @@ public class DatabaseRecipeDao implements RecipeDao {
 
                 recipes.add(recipe);
                 return true;
+            } catch (NumberFormatException | SQLException e) {
+                return false;
             }
-            return false;
-
-        } catch (NumberFormatException | SQLException e) {
-            return false;
         }
+
+        return false;
     }
 
     /**
-     *
+     * Adds an ingredient for a recipe in the database.
      * @param ingredient the ingredient to be added to a recipe and database
      * @param recipeName the name of the recipe to which the ingredient is added
      * @return
@@ -92,16 +88,13 @@ public class DatabaseRecipeDao implements RecipeDao {
 
         Recipe recipe = fetchRecipe(recipeName);
 
-        try {
+        int recipeId = getRecipeId(recipeName);
 
-            Connection db = DriverManager.getConnection("jdbc:h2:" + database, "admin", "");
+        if (recipeId > 0) {
 
-            PreparedStatement stmtUser = db.prepareStatement("SELECT id FROM Recipe WHERE name = ?");
-            stmtUser.setString(1, recipeName);
-            ResultSet rs = stmtUser.executeQuery();
+            try {
 
-            if (rs.next()) {
-                int recipeId = Integer.parseInt(rs.getString(1));
+                Connection db = DriverManager.getConnection("jdbc:h2:" + database, "admin", "");
 
                 PreparedStatement stmt = db.prepareStatement("INSERT INTO Ingredient (recipeId, name, amount, unit) VALUES (?, ?, ?, ?)");
                 stmt.setInt(1, recipeId);
@@ -115,15 +108,19 @@ public class DatabaseRecipeDao implements RecipeDao {
 
                 recipe.addIngredient(ingredient);
                 return true;
+
+            } catch (NumberFormatException | SQLException e) {
+                return false;
             }
-            return false;
-        } catch (NumberFormatException | SQLException e) {
-            return false;
         }
+
+        return false;
     }
 
     /**
-     * fetches all recipes from the database and adds them to the object variable recipes
+     * Fetches all recipes from the database and adds them to the object
+     * variable recipes
+     *
      * @return true, if database query is successful, otherwise false
      */
     public boolean fetchAllRecipes() {
@@ -146,15 +143,60 @@ public class DatabaseRecipeDao implements RecipeDao {
 
         } catch (SQLException e) {
             return false;
-        } catch (Exception e) {
-            throw e;
         }
 
         return true;
     }
 
     /**
-     * 
+     * Fetches the userId for a user from the database
+     * @param authorName the recipe author name
+     * @return userId, if the user exists, -1 otherwise
+     */
+    private int getUserId(String authorName) {
+        try {
+            Connection db = DriverManager.getConnection("jdbc:h2:" + database, "admin", "");
+            PreparedStatement stmtUser = db.prepareStatement("SELECT id, name FROM User WHERE name = ?");
+            stmtUser.setString(1, authorName);
+            ResultSet rs = stmtUser.executeQuery();
+
+            if (rs.next()) {
+                int userId = Integer.parseInt(rs.getString(1));
+                return userId;
+            }
+            return -1;
+        } catch (NumberFormatException | SQLException e) {
+            return -1;
+        }
+    }
+
+    /**
+     * Fetches the recipeId for a recipe from the database
+     * @param recipeName the name of the recipe
+     * @return recipeId, if the recipe exists, -1 otherwise
+     */
+    private int getRecipeId(String recipeName) {
+
+        try {
+            Connection db = DriverManager.getConnection("jdbc:h2:" + database, "admin", "");
+
+            PreparedStatement stmtUser = db.prepareStatement("SELECT id FROM Recipe WHERE name = ?");
+            stmtUser.setString(1, recipeName);
+            ResultSet rs = stmtUser.executeQuery();
+
+            if (rs.next()) {
+                int recipeId = Integer.parseInt(rs.getString(1));
+                return recipeId;
+            }
+        } catch (NumberFormatException | SQLException e) {
+            return -1;
+        }
+
+        return -1;
+    }
+
+    /**
+     * Fetches and returns a recipe
      * @param name name of the recipe to be fetched
      * @return Recipe object, if the recipe exists, otherwise null
      */
