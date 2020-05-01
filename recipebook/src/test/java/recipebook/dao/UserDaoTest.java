@@ -53,7 +53,7 @@ public class UserDaoTest {
     }
     
     @Test
-    public void findByUsernameReturnsUserWithCorrectName() throws Exception {
+    public void findByUsernameReturnsUserWithCorrectName() {
         User user = new User("testiuser", "123");
         dao.createUser(user);
         

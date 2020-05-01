@@ -49,5 +49,10 @@ public class FakeRecipeDao implements RecipeDao {
         fetchRecipe(recipeName).addIngredient(ingredient);
         return true;
     }
+
+    @Override
+    public boolean fetchAllRecipes() {
+        return true;
+    }
     
 }

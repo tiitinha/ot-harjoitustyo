@@ -25,6 +25,8 @@ import recipebook.dao.DatabaseRecipeDao;
 import recipebook.dao.DatabaseUserDao;
 import recipebook.dao.RecipeDao;
 import recipebook.dao.UserDao;
+import recipebook.domain.Ingredient;
+import recipebook.domain.Recipe;
 import recipebook.domain.RecipebookService;
 
 /**
@@ -54,7 +56,9 @@ public class Gui extends Application {
         RecipeDao recipeDao = new DatabaseRecipeDao(databaseFile, userDao);
 
         recipebook = new RecipebookService(recipeDao, userDao);
-        recipebook.connectToDatabase(databaseFile);
+        if(!recipebook.connectToDatabase(databaseFile)) {
+            System.out.println("ERROR!");
+        }
     }
 
     public static void main(String[] args) {
@@ -148,12 +152,12 @@ public class Gui extends Application {
             String username = newUsername.getText();
             String password = newUserPassword.getText();
 
-            if (username.length() < 4) {
+            if (username.length() < 3) {
                 userCreationMessage.setText("Username is too short!");
             } else if (!username.matches("[a-zA-Z0-9]")) {
                 userCreationMessage.setText("Invalid username, only letters and numbers allowed!");
             }
-            if (password.length() < 6) {
+            if (password.length() < 5) {
                 userCreationMessage.setText("Password too short!");
             } else if (recipebook.createUser(username, password)) {
                 userCreationMessage.setText("");
@@ -202,8 +206,8 @@ public class Gui extends Application {
         searchRecipeNamePane.getChildren().addAll(searchRecipeNameLabel, searchRecipeName);
 
         searchRecipeButton.setOnAction(e -> {
-//            searchFieldRecipeName = searchRecipeName.getText();
-//            primaryStage.setScene(recipeSearchScene);
+            searchFieldRecipeName = searchRecipeName.getText();
+            primaryStage.setScene(searchResultScene(searchFieldRecipeName, primaryStage));
         });
 
         searchRecipePane.getChildren().addAll(searchRecipeLabel, searchRecipeNamePane, searchRecipeButton);
@@ -218,9 +222,6 @@ public class Gui extends Application {
         mainScenePane.getChildren().addAll(menuPane, searchRecipePane, changeToAddRecipeSceneButton);
 
         mainScene = new Scene(mainScenePane, 750, 500);
-
-        /* Setup the scene for serach results */
-        VBox searchResultPane = new VBox(10);
 
         /* Setup the scene for adding a new recipe */
         VBox addNewRecipeScenePane = new VBox(10);
@@ -343,6 +344,45 @@ public class Gui extends Application {
             }
 
         });
+    }
+
+    public Scene searchResultScene(String recipeName, Stage primaryStage) {
+        HBox menuPane = new HBox(10);
+        menuPane.setPadding(new Insets(10));
+        Region menuSpacer = new Region();
+        HBox.setHgrow(menuSpacer, Priority.ALWAYS);
+        Button backButton = new Button("Back");
+
+        backButton.setOnAction(e -> {
+            primaryStage.setScene(loginScene);
+        });
+        
+        menuPane.getChildren().addAll(menuSpacer, backButton);
+        
+        VBox searchResultPane = new VBox(10);
+        searchResultPane.setPadding(new Insets(10));
+        Label searchResultLabel = new Label("");
+        Label searchResultIngredients = new Label("");
+
+        Recipe recipe = recipebook.fetchRecipe(recipeName);
+
+        if (recipe == null) {
+            searchResultLabel.setText("No recipe with name " + recipeName + " found.");
+        } else {
+            searchResultLabel.setText(recipe.getName());
+
+            recipe.getIngredients().values().forEach((ingredient) -> {
+                searchResultIngredients.setText(searchResultIngredients.getText() + "\n" + ingredient.toString());
+            });
+
+        }
+
+        searchResultPane.getChildren().addAll(menuPane, searchResultLabel, searchResultIngredients);
+
+        Scene searchResultScene = new Scene(searchResultPane, 750, 500);
+
+        return searchResultScene;
+
     }
 
     @Override

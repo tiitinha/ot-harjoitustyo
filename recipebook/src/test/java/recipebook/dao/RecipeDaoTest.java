@@ -10,6 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 import recipebook.domain.DatabaseService;
 import recipebook.domain.FakeUserDao;
+import recipebook.domain.Ingredient;
+import recipebook.domain.Recipe;
 import recipebook.domain.User;
 
 /**
@@ -22,6 +24,7 @@ public class RecipeDaoTest {
     private String path;
     private RecipeDao recipeDao;
     private UserDao userDao;
+    private User user;
 
     
     @Before
@@ -32,7 +35,7 @@ public class RecipeDaoTest {
         userDao = new FakeUserDao();
         recipeDao = new DatabaseRecipeDao(path, userDao);
         
-        User user = new User("Testi", "salasana");
+        user = new User("Testi", "salasana");
         userDao.createUser(user);
     }
     
@@ -40,6 +43,16 @@ public class RecipeDaoTest {
     public void addingARecipeSuccessfullyReturnsTrue() {
         boolean value = recipeDao.addRecipe("test", "Testi");
         assertTrue(value);
+    }
+    
+    @Test
+    public void addingIngredientToARecipeAddsIngredient() {
+        recipeDao.addRecipe("omlette", user.getName());
+        Ingredient ingredient = new Ingredient("egg", 1, "pcs");
+        recipeDao.addIngredient(ingredient, "Testi");
+        
+        Recipe recipe = recipeDao.fetchRecipe("omlette");
+        assertTrue(recipe.getIngredients().containsKey("egg"));
     }
 
 }

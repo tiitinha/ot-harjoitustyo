@@ -39,19 +39,19 @@ public class DatabaseUserDao implements UserDao {
     @Override
     public boolean fetchUsers() {
         try {
-            try (Connection db = DriverManager.getConnection("jdbc:h2:" + database, "admin", "")) {
-                PreparedStatement stmt = db.prepareStatement("SELECT * FROM User;");
-                ResultSet rs = stmt.executeQuery();
+            Connection db = DriverManager.getConnection("jdbc:h2:" + database, "admin", "");
+            PreparedStatement stmt = db.prepareStatement("SELECT * FROM User;");
+            ResultSet rs = stmt.executeQuery();
 
-                while (rs.next()) {
-                    User user = new User(rs.getString("name"), rs.getString("password"));
-                    users.add(user);
-                }
-
-                rs.close();
-                stmt.close();
-                db.close();
+            while (rs.next()) {
+                User user = new User(rs.getString("name"), rs.getString("password"));
+                users.add(user);
             }
+
+            rs.close();
+            stmt.close();
+            db.close();
+
         } catch (SQLException e) {
             return false;
         }
@@ -61,12 +61,13 @@ public class DatabaseUserDao implements UserDao {
 
     /**
      * Creates a new user to the database table User
+     *
      * @param user an instance of User class
      * @return true, if user creation successful, otherwise false
      */
     @Override
     public boolean createUser(User user) {
-        if (userExists(user)) {
+        if (!userExists(user)) {
             try {
                 Connection db = DriverManager.getConnection("jdbc:h2:" + database, "admin", "");
                 Statement s = db.createStatement();
@@ -82,6 +83,7 @@ public class DatabaseUserDao implements UserDao {
                 users.add(user);
 
             } catch (SQLException e) {
+                System.out.println(e.getMessage());
                 return false;
             }
             return true;
@@ -91,6 +93,7 @@ public class DatabaseUserDao implements UserDao {
 
     /**
      * Finds and returns a User-object, if the user with username exist.
+     *
      * @param username
      * @return User object, if user exists, otherwise null
      */
@@ -107,7 +110,7 @@ public class DatabaseUserDao implements UserDao {
     public List<User> getAllUsers() {
         return users;
     }
-    
+
     public boolean userExists(User user) {
         return users.contains(user);
     }

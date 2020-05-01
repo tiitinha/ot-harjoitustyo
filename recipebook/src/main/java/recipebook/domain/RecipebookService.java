@@ -26,6 +26,7 @@ public class RecipebookService {
 
     /**
      * Creates a new recipe by calling RecipeDao-method.
+     *
      * @param name the name of the new recipe
      * @param user the user who is adding the recipe
      * @return true, if creating the recipe succeeds, otherwise false
@@ -40,7 +41,9 @@ public class RecipebookService {
     }
 
     /**
-     * Adds a new ingredient to the recipe with the given name by calling RecipeDao-method.
+     * Adds a new ingredient to the recipe with the given name by calling
+     * RecipeDao-method.
+     *
      * @param recipeName the name of the recipe to which the ingredient is added
      * @param name the name of the ingredient
      * @param amount the amount of the ingredient
@@ -74,6 +77,7 @@ public class RecipebookService {
 
         try {
             userDao.fetchUsers();
+            recipeDao.fetchAllRecipes();
             return true;
         } catch (Exception e) {
             return false;
@@ -82,7 +86,9 @@ public class RecipebookService {
     }
 
     /**
-     * Method that assigns the user to be logged in, if the password and username are correct.
+     * Method that assigns the user to be logged in, if the password and
+     * username are correct.
+     *
      * @param username username
      * @param password password
      * @return true, if the username exists in the database, false otherwise
@@ -112,19 +118,32 @@ public class RecipebookService {
 
     /**
      * Creates a new user by calling UserDao-method.
+     *
      * @param username username for the new user
      * @param password password for the new user
      * @return returns false, if creating the user fails, otherwise true
      */
     public boolean createUser(String username, String password) {
-            User user = new User(username, password);
-            return userDao.createUser(user);
+        User user = new User(username, password);
+        return userDao.createUser(user);
     }
 
+    /**
+     * Returns a recipe with the name
+     *
+     * @param name
+     * @return A recipe object with the name equal to the given parameter
+     */
     public Recipe fetchRecipe(String name) {
         return recipeDao.fetchRecipe(name);
     }
 
+    /**
+     * Returns a list of recipes with a given username as author
+     *
+     * @param username
+     * @return A list of recipes
+     */
     public List<Recipe> getUsersRecipes(String username) {
         return recipeDao.getUsersRecipes(username);
     }

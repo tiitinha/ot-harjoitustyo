@@ -26,4 +26,6 @@ public interface RecipeDao {
     
     List<Recipe> getUsersRecipes(String username);
     
+    boolean fetchAllRecipes();
+    
 }

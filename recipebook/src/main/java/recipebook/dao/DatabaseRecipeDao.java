@@ -110,10 +110,10 @@ public class DatabaseRecipeDao implements RecipeDao {
                 return true;
 
             } catch (NumberFormatException | SQLException e) {
+                System.out.println(e.getMessage());
                 return false;
             }
         }
-
         return false;
     }
 
@@ -205,11 +205,19 @@ public class DatabaseRecipeDao implements RecipeDao {
         return recipes.stream().filter(r -> r.getName().equals(name)).findFirst().orElse(null);
     }
 
+    /**
+     * 
+     * @return A list of all recipes in the recipebook
+     */
     @Override
     public List<Recipe> getAll() {
         return recipes;
     }
-
+    /**
+     * 
+     * @param username
+     * @return A list of all recipes with the given user as the author
+     */
     @Override
     public List<Recipe> getUsersRecipes(String username) {
         return recipes.stream().filter(r -> r.getAuthor().equals(username)).collect(Collectors.toList());
