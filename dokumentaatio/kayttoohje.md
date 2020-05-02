@@ -21,3 +21,5 @@ Reseptikirjassa voi siirtyä reseptinluomisnäkymään painamalla nappia 'Add re
 Uuden reseptin luomisen jälkeen ohjelmassa voi syöttää reseptiin raaka-aineita. Raaka-aineen pystyy lisäämään napista 'Add ingredient'. Raaka-aineita ei voi lisätä repsetiin jälkikäteen.
 
 ## Reseptin hakeminen
+
+Käyttäjä voi hakea reseptikirjan reseptejä päänäkymästä kirjoittamalla reseptin nimen tekstikenttään ja klikkaamalla "Search". Haku löytää vain täysin oikealla nimellä haetut reseptit.

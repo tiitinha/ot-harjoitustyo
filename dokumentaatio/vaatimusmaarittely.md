@@ -26,6 +26,7 @@ Sovelluksessa on vain yksi käyttäjätyyppi. Sovelluksessa voi luoda uusia käy
 	- uusi luotu resepti näkyy kaikille käyttäjille
 - käyttäjä voi etsiä reseptejä järjestelmästä
 	- reseptiä voi hakea reseptin nimellä
+	- reseptihaku löytää reseptin vain samalla nimellä
 - käyttäjä voi kirjautua ulos järjestelmästä
 
 ## Jatkokehitysideoita
@@ -34,6 +35,7 @@ Sovelluksessa on vain yksi käyttäjätyyppi. Sovelluksessa voi luoda uusia käy
 - jo luotujen reseptien muokkaaminen
 - kuvien lisääminen reseptiin
 - reseptien luokittelu eri kategorioihin (tagit)
+	- reseptien etsiminen tagien perusteella
 - reseptien selaaminen ja filtteröinti eri tekijöiden perusteella
 - useamman käyttäjätyypin luominen
 	- admin-käyttäjät voisivat esim. poistaa olemassa olevia reseptejä
