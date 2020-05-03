@@ -36,6 +36,7 @@ public class DatabaseRecipeDao implements RecipeDao {
 
     /**
      * Adds a new recipe to the database, if the recipe doesn't already exist.
+     *
      * @param name name of the recipe
      * @param authorName the name of the author of the recipe
      * @return returns false if the adding fails either due to exception or
@@ -44,7 +45,7 @@ public class DatabaseRecipeDao implements RecipeDao {
     @Override
     public boolean addRecipe(String name, String authorName) {
 
-        Recipe recipe = new Recipe(name, authorName);
+        Recipe recipe = new Recipe(name.toLowerCase(), authorName);
 
         if (recipes.contains(recipe)) {
             return false;
@@ -57,7 +58,7 @@ public class DatabaseRecipeDao implements RecipeDao {
                 Connection db = DriverManager.getConnection("jdbc:h2:" + database, "admin", "");
 
                 PreparedStatement stmt = db.prepareStatement("INSERT INTO Recipe (name, createUserId) VALUES (?, ?);");
-                stmt.setString(1, name);
+                stmt.setString(1, name.toLowerCase());
                 stmt.setInt(2, userId);
 
                 stmt.executeUpdate();
@@ -76,17 +77,18 @@ public class DatabaseRecipeDao implements RecipeDao {
 
     /**
      * Adds an ingredient for a recipe in the database.
+     *
      * @param ingredient the ingredient to be added to a recipe and database
      * @param recipeName the name of the recipe to which the ingredient is added
      * @return
      */
     @Override
     public boolean addIngredient(Ingredient ingredient, String recipeName) {
-        if (fetchRecipe(recipeName) == null) {
+        if (fetchRecipe(recipeName.toLowerCase()) == null) {
             return false;
         }
 
-        Recipe recipe = fetchRecipe(recipeName);
+        Recipe recipe = fetchRecipe(recipeName.toLowerCase());
 
         int recipeId = getRecipeId(recipeName);
 
@@ -110,7 +112,6 @@ public class DatabaseRecipeDao implements RecipeDao {
                 return true;
 
             } catch (NumberFormatException | SQLException e) {
-                System.out.println(e.getMessage());
                 return false;
             }
         }
@@ -123,6 +124,7 @@ public class DatabaseRecipeDao implements RecipeDao {
      *
      * @return true, if database query is successful, otherwise false
      */
+    @Override
     public boolean fetchAllRecipes() {
         try {
             try (Connection db = DriverManager.getConnection("jdbc:h2:" + database, "admin", "")) {
@@ -134,7 +136,7 @@ public class DatabaseRecipeDao implements RecipeDao {
                     stmtIngredients.setString(1, rs.getString("createUserId"));
                     Recipe recipe = new Recipe(rs.getString("name"), rs.getString("createUserId"));
                     recipes.add(recipe);
-                }
+                } 
 
                 rs.close();
                 stmt.close();
@@ -150,6 +152,7 @@ public class DatabaseRecipeDao implements RecipeDao {
 
     /**
      * Fetches the userId for a user from the database
+     *
      * @param authorName the recipe author name
      * @return userId, if the user exists, -1 otherwise
      */
@@ -172,6 +175,7 @@ public class DatabaseRecipeDao implements RecipeDao {
 
     /**
      * Fetches the recipeId for a recipe from the database
+     *
      * @param recipeName the name of the recipe
      * @return recipeId, if the recipe exists, -1 otherwise
      */
@@ -181,7 +185,7 @@ public class DatabaseRecipeDao implements RecipeDao {
             Connection db = DriverManager.getConnection("jdbc:h2:" + database, "admin", "");
 
             PreparedStatement stmtUser = db.prepareStatement("SELECT id FROM Recipe WHERE name = ?");
-            stmtUser.setString(1, recipeName);
+            stmtUser.setString(1, recipeName.toLowerCase());
             ResultSet rs = stmtUser.executeQuery();
 
             if (rs.next()) {
@@ -197,6 +201,7 @@ public class DatabaseRecipeDao implements RecipeDao {
 
     /**
      * Fetches and returns a recipe
+     *
      * @param name name of the recipe to be fetched
      * @return Recipe object, if the recipe exists, otherwise null
      */
@@ -206,15 +211,16 @@ public class DatabaseRecipeDao implements RecipeDao {
     }
 
     /**
-     * 
+     *
      * @return A list of all recipes in the recipebook
      */
     @Override
     public List<Recipe> getAll() {
         return recipes;
     }
+
     /**
-     * 
+     *
      * @param username
      * @return A list of all recipes with the given user as the author
      */

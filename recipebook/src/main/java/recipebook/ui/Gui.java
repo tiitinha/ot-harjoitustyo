@@ -354,7 +354,7 @@ public class Gui extends Application {
         Button backButton = new Button("Back");
 
         backButton.setOnAction(e -> {
-            primaryStage.setScene(loginScene);
+            primaryStage.setScene(mainScene);
         });
         
         menuPane.getChildren().addAll(menuSpacer, backButton);

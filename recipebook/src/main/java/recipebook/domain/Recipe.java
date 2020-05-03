@@ -18,7 +18,7 @@ public class Recipe implements Comparable<Recipe> {
     private String author;
 
     public Recipe(String name, String author) {
-        this.name = name;
+        this.name = name.toLowerCase();
         this.ingredients = new HashMap<>();
         this.author = author;
     }

@@ -32,4 +32,9 @@ public class DatabaseTest {
     public void createDatabseReturnsTrueIfDatabaseSuccessfullyCreated() {
         assertTrue(db.createDatabase(path));
     }
+    
+    @Test
+    public void createDatabaseReturnsFlaseIfDatabaseNotCreated() {
+        assertFalse(db.createDatabase("testi"));
+    }
 }

@@ -28,28 +28,39 @@ public class RecipeTest {
         Ingredient ingredient = new Ingredient("egg", 1, "pcs");
         assertTrue(recipe.addIngredient(ingredient));
     }
-    
+
     @Test
     public void addingDuplicateIngredientReturnsFalse() {
         Ingredient ingredient = new Ingredient("egg", 1, "pcs");
         Ingredient ingredient2 = new Ingredient("egg", 1, "pcs");
-        
+
         recipe.addIngredient(ingredient);
         assertFalse(recipe.addIngredient(ingredient2));
     }
-    
+
     @Test
     public void addingIgredientAddsIngredientToIngredientList() {
         Ingredient ingredient = new Ingredient("egg", 1, "pcs");
-        
+
         recipe.addIngredient(ingredient);
         assertTrue(recipe.getIngredients().containsKey("egg"));
     }
-    
+
     @Test
     public void equalsReturnsTrueWithSameRecipeName() {
         Recipe newRecipe = new Recipe("omlette", "test");
         assertTrue(recipe.equals(newRecipe));
     }
 
+    @Test
+    public void compareToReturnsZeroIfSameName() {
+        Recipe recipe2 = new Recipe("omlette", "test");
+        assertTrue(recipe.compareTo(recipe2) == 0);
+    }
+
+    @Test
+    public void compareToDoesntReturnZeroIfDifferentName() {
+        Recipe recipe2 = new Recipe("egglette", "test");
+        assertFalse(recipe.compareTo(recipe2) == 0);
+    }
 }

@@ -5,6 +5,8 @@
  */
 package recipebook.domain;
 
+import java.util.List;
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +16,7 @@ import org.junit.Test;
  * @author tiitinha
  */
 public class RecipeBookServiceRecipeTest {
-    
+
     private FakeUserDao userDao;
     private FakeRecipeDao recipeDao;
     private User user1;
@@ -32,11 +34,25 @@ public class RecipeBookServiceRecipeTest {
         recipebook = new RecipebookService(recipeDao, userDao);
     }
 
-    
     @Test
     public void addingAnIngredientAddsIngredientToARecipe() {
         recipebook.createNewRecipe("omlette", "test");
         recipebook.addIngredient("omlette", "egg", 1, "pcs");
         assertTrue(recipebook.fetchRecipe("omlette").getIngredients().containsKey("egg"));
     }
+
+    @Test
+    public void getUsersRecipesReturnsAList() {
+        assertTrue(recipebook.getUsersRecipes("Testi") instanceof List);
+    }
+
+    @Test
+    public void getUsersRecipesContainsAddedRecipes() {
+        recipebook.createNewRecipe("omlette", "Testi");
+        List<Recipe> recipes = recipebook.getUsersRecipes("Testi");
+        assertTrue(recipes.contains(new Recipe("omlette", "Testi")));
+    }
+    
+    
+
 }
