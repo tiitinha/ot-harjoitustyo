@@ -21,5 +21,6 @@
 | 28.4 | 1     | Koodin siistimistä sekä dokumentaation työstämistä |
 | 29.4 | 1     | JavaDocin työstämistä ja dokumentaatiota |
 | 1.5  | 2     | Reseptin etsimisominaisuuden työstäminen + luokkakaavioita ym. |
-| 2.5. | 1.5   | Koodin siivoamista, dokumentaatiota |
-| yht   | 39.0	 | |
+| 2.5  | 1.5   | Koodin siivoamista, dokumentaatiota |
+| 3.5  | 1.5   | Testien kirjoittamista, checkstylen ongelmien selvitystä |
+| yht   | 41.5	 | |

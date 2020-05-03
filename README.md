@@ -1,6 +1,6 @@
 # Recipebook
 
-Sovelluksen avulla käyttäjät voivat koota reseptikirjaa (lisätä uusia reseptejä sekä selata ja etsiä muiden lisäämiä reseptejä). Sovellusta voi käyttää useampi rekisteröitynyt käyttäjä, jotka voivat hallinnoida (poistaa) omia reseptejään.
+Sovelluksen avulla käyttäjät voivat koota reseptikirjaa (lisätä uusia reseptejä sekä selata ja etsiä muiden lisäämiä reseptejä). Sovellusta voi käyttää useampi rekisteröitynyt käyttäjä.
 
 ## Dokumentaatio
 [Käyttöohje](https://github.com/afroseppo/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
@@ -16,6 +16,7 @@ Sovelluksen avulla käyttäjät voivat koota reseptikirjaa (lisätä uusia resep
 ## Releaset
 
 [Viikko 6](https://github.com/afroseppo/ot-harjoitustyo/releases/tag/v0.1)
+[Loppurelease]
 
 Ohjelma tulee suorittaa komentorivillä komennolla ```java -jar Recipebook.jar``` ja releasessa olevan config.properties-tiedoston tulee olla samassa polussa.
 
