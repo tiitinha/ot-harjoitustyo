@@ -6,7 +6,7 @@
 package recipebook.domain;
 
 import java.util.List;
-import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,8 +42,10 @@ public class RecipeBookServiceRecipeTest {
     }
 
     @Test
-    public void getUsersRecipesReturnsAList() {
+    public void getUsersRecipesReturnsAListOfCorrectSize() {
         assertTrue(recipebook.getUsersRecipes("Testi") instanceof List);
+        recipebook.createNewRecipe("testi", "test");
+        assertEquals(1, recipebook.getUsersRecipes("test").size());
     }
 
     @Test
@@ -53,6 +55,10 @@ public class RecipeBookServiceRecipeTest {
         assertTrue(recipes.contains(new Recipe("omlette", "Testi")));
     }
     
-    
+    @Test
+    public void getRecipeReturnsCorrectRecipeIfExists() {
+        recipebook.createNewRecipe("testi", "test");
+        assertEquals(new Recipe("testi", "test"), recipebook.fetchRecipe("testi"));
+    }
 
 }

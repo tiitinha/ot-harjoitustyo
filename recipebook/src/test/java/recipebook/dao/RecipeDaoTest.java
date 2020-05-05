@@ -5,6 +5,7 @@
  */
 package recipebook.dao;
 
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,10 +50,17 @@ public class RecipeDaoTest {
     public void addingIngredientToARecipeAddsIngredient() {
         recipeDao.addRecipe("omlette", user.getName());
         Ingredient ingredient = new Ingredient("egg", 1, "pcs");
-        recipeDao.addIngredient(ingredient, "Testi");
+        recipeDao.addIngredient(ingredient, "omlette");
         
         Recipe recipe = recipeDao.fetchRecipe("omlette");
         assertTrue(recipe.getIngredients().containsKey("egg"));
+    }
+    
+    @Test
+    public void fetchRecipeReturnsCorrectRecipe() {
+        recipeDao.addRecipe("omlette", user.getName());
+        
+        assertEquals(new Recipe("omlette", user.getName()), recipeDao.fetchRecipe("omlette"));
     }
 
 }
