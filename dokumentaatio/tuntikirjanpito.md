@@ -23,4 +23,6 @@
 | 1.5  | 2     | Reseptin etsimisominaisuuden työstäminen + luokkakaavioita ym. |
 | 2.5  | 1.5   | Koodin siivoamista, dokumentaatiota |
 | 3.5  | 1.5   | Testien kirjoittamista, checkstylen ongelmien selvitystä |
-| yht   | 41.5	 | |
+| 5.5  | 1     | Luokkakuvaajien ym. työstämistä ja testien kirjoittamista + korjailua |
+| 7.5  | 1     | Tietokannasta reseptien haun korjaus |
+| yht   | 43.5	 | |
