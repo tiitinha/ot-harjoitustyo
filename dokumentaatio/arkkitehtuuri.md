@@ -1,8 +1,10 @@
-# Rakenne
+# Arkkitehtuurikuvaus
+
+## Rakenne
 
 Ohjelman arkkitehtuuri on kolmikerroksinen ja perusrakenne koostuu kolmesta pakkauksesta: recipebook.ui, recipebook.domain ja recipebook.dao. Pakkaus recipebook.ui sisältää gravfisen käytöliittymän toetutuksen JafaFX:llä, recipebook.domin sisältää käyttöliittymäkoodin sekä ohjelman rakenteen kannalta tärkeät luokat ja recipebook.dao sisältää pysyväistallennuksesta vastavat luokat ja rajapinnat.
 
-<img src="https://raw.githubusercontent.com/afroseppo/ot-harjoitustyo/77d1fe376c7805ee66a40e9d55e7112e77fed30d/dokumentaatio/kuvaajat/structure.svg" width="450">
+<img src="https://raw.githubusercontent.com/afroseppo/ot-harjoitustyo/77d1fe376c7805ee66a40e9d55e7112e77fed30d/dokumentaatio/kuvaajat/structure.svg" height="450">
 
 ## Käyttöliittymä
 
