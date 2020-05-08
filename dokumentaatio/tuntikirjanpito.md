@@ -25,4 +25,5 @@
 | 3.5  | 1.5   | Testien kirjoittamista, checkstylen ongelmien selvitystä |
 | 5.5  | 1     | Luokkakuvaajien ym. työstämistä ja testien kirjoittamista + korjailua |
 | 7.5  | 1     | Tietokannasta reseptien haun korjaus |
-| yht   | 43.5	 | |
+| 8.5  | 1.5   | Arkkitehtuurikuvausta ym. dokumentaatiota |
+| yht   | 45	 | |

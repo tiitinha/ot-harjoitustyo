@@ -25,12 +25,10 @@ import recipebook.domain.Recipe;
 public class DatabaseRecipeDao implements RecipeDao {
 
     private String database;
-    private UserDao users;
     private List<Recipe> recipes;
 
-    public DatabaseRecipeDao(String database, UserDao users) {
+    public DatabaseRecipeDao(String database) {
         this.database = database;
-        this.users = users;
         recipes = new ArrayList();
     }
 
@@ -52,6 +50,7 @@ public class DatabaseRecipeDao implements RecipeDao {
         }
 
         int userId = getUserId(authorName);
+        System.out.println(userId);
         if (userId > 0) {
 
             try {
@@ -64,6 +63,8 @@ public class DatabaseRecipeDao implements RecipeDao {
                 stmt.executeUpdate();
                 stmt.close();
                 db.close();
+
+                System.out.println("addid");
 
                 recipes.add(recipe);
                 return true;
@@ -91,6 +92,7 @@ public class DatabaseRecipeDao implements RecipeDao {
         Recipe recipe = fetchRecipe(recipeName.toLowerCase());
 
         int recipeId = getRecipeId(recipeName);
+        System.out.println(recipeId);
 
         if (recipeId > 0) {
 
@@ -108,6 +110,7 @@ public class DatabaseRecipeDao implements RecipeDao {
                 stmt.close();
                 db.close();
 
+                System.out.println("ingredient");
                 recipe.addIngredient(ingredient);
                 return true;
 
@@ -128,17 +131,31 @@ public class DatabaseRecipeDao implements RecipeDao {
     public boolean fetchAllRecipes() {
         try {
             try (Connection db = DriverManager.getConnection("jdbc:h2:" + database, "admin", "")) {
-                PreparedStatement stmt = db.prepareStatement("SELECT name, createUserId FROM Recipe;");
+                PreparedStatement stmt = db.prepareStatement("SELECT id, name, createUserId FROM Recipe;");
                 ResultSet rs = stmt.executeQuery();
 
                 while (rs.next()) {
-                    PreparedStatement stmtIngredients = db.prepareStatement("SELECT name, createUserId from Ingredient WHERE createUserId = ?");
-                    stmtIngredients.setString(1, rs.getString("createUserId"));
                     Recipe recipe = new Recipe(rs.getString("name"), rs.getString("createUserId"));
-                    recipes.add(recipe);
-                } 
+                    int recipeId = rs.getInt(1);
+                    try {
+                        PreparedStatement stmtIngredients = db.prepareStatement("SELECT name, amount, unit from Ingredient WHERE recipeId = ?;");
+                        
+                        stmtIngredients.setInt(1, recipeId);
 
-                rs.close();
+                        ResultSet rsIngredient = stmtIngredients.executeQuery();
+
+                        while (rsIngredient.next()) {
+                            Ingredient ingredient = new Ingredient(rsIngredient.getString("name"), rsIngredient.getInt("amount"), rsIngredient.getString("unit"));
+                            recipe.addIngredient(ingredient);
+                        }
+
+                    } catch (SQLException e) {
+                        System.out.println("error");
+                        return false;
+                    }
+                    recipes.add(recipe);
+                }
+
                 stmt.close();
                 db.close();
             }

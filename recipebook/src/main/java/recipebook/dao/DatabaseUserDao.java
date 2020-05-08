@@ -31,7 +31,7 @@ public class DatabaseUserDao implements UserDao {
     }
 
     /**
-     * Gets all users from database and adds to an ArrayList
+     * Gets all users from database and adds them to an ArrayList
      *
      * @return returns true, if connection to database successful, otherwise
      * false

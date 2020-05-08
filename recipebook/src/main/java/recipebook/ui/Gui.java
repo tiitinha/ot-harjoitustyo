@@ -53,7 +53,7 @@ public class Gui extends Application {
         String databaseFile = databasePath + database;
 
         UserDao userDao = new DatabaseUserDao(databaseFile);
-        RecipeDao recipeDao = new DatabaseRecipeDao(databaseFile, userDao);
+        RecipeDao recipeDao = new DatabaseRecipeDao(databaseFile);
 
         recipebook = new RecipebookService(recipeDao, userDao);
         if(!recipebook.connectToDatabase(databaseFile)) {

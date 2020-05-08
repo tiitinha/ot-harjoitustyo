@@ -2,6 +2,8 @@
 
 Ohjelman arkkitehtuuri on kolmikerroksinen ja perusrakenne koostuu kolmesta pakkauksesta: recipebook.ui, recipebook.domain ja recipebook.dao. Pakkaus recipebook.ui sisältää gravfisen käytöliittymän toetutuksen JafaFX:llä, recipebook.domin sisältää käyttöliittymäkoodin sekä ohjelman rakenteen kannalta tärkeät luokat ja recipebook.dao sisältää pysyväistallennuksesta vastavat luokat ja rajapinnat.
 
+<img src="https://raw.githubusercontent.com/afroseppo/ot-harjoitustyo/77d1fe376c7805ee66a40e9d55e7112e77fed30d/dokumentaatio/kuvaajat/structure.svg" width="450">
+
 ## Käyttöliittymä
 
 Käyttöiittymä sisältää viisi erillistä näkymää:
@@ -20,6 +22,8 @@ Käyttöliittymä on eristetty sovelluslogiikasta ja kutsuu sovelluslogiikkaluok
 
 Sovelluksen looginen datamalli muodostuu luokista User, Recipe ja Ingredient, jotka kuvaavat käyttäjiä, reseptejä sekä raaka-aineita. Luokkien väliset suhteet kuvattu alla:
 
+<img src="https://raw.githubusercontent.com/afroseppo/ot-harjoitustyo/master/dokumentaatio/kuvaajat/luokatDomain.png" width="450">
+
 Toiminnallisuudesta vastaa luokan RecipebookService olio, joka tarjoaa käyttöliittymän toiminnoille metodeita. Näitä metodeita ovat:
 - void logout()
 - User getLoggedUser()
@@ -28,6 +32,10 @@ Toiminnallisuudesta vastaa luokan RecipebookService olio, joka tarjoaa käyttöl
 - boolean createNewRecipe(String name, String user)
 
 RecipebookService pääsee käsittelemään käyttäjä-, resepti-, ja reseptin raaka-ainetietoja rajapintojen RecipeDao ja UserDao toteuttavien luokkien kautta.
+
+Alla oleva kuva esittää pakkausten ja luokkien suhdetta.
+
+<img src="https://raw.githubusercontent.com/afroseppo/ot-harjoitustyo/master/dokumentaatio/kuvaajat/luokka_pakkaus.png" width="450">
 
 ## Tietojen pysyväistallennus
 
@@ -38,6 +46,31 @@ Luokat on toteutettu Data Access Object -mallilla, joten ne on mahdollista korva
 ### Tietokannat
 
 Sovellus tallentaa käyttäjien, reseptien ja reseptiin kuuluvien raaka-aineiden tiedot erilliseen h2-tietokantaan. Sovelluksen juuressa on konfiguraatiotiedosto config.properties, joka määrittelee sekä tietokannan nimen, että tietokannan polun. Tietokantayhteyksiä käsitellään Javan java.sql-paketin avulla.
+
+## Päätoiminnallisuudet
+
+Sovelluksen toimintalogiikka kuvataan alla päätoiminnallisuuksien osalta sekvenssikaavioina.
+
+### Kirjautuminen
+
+Kun kirjautumisnäkymässä on syötetty käyttäjätunnus sekä salasana, klikattaessa painiketta Login sovelluksessa tapahtuu seuravaaa:
+
+Painikkeen tapahtumakäsittelijä kutsuu sovelluslogiikan recipebookService metodia login parametreina käyttäjätunnus sekä salasana. Sovelluslogiikka hakee UserDaon findUserByName-metodia kutsumalla käyttäjää. Jos käyttäjänimellä löytyy käyttäjätunnus, niin recipebookService tarkistaa, että vastaako käyttäjän salasana syötettyä salasanaa. Jos salasana on oikein, palauttaa metodi totuusarvon true. Tällöin käyttöliittymä vaihtaa näkymäksi mainScenen eli sovelluksen päänäkymän, josta pääsee siirtymään muihin toiminnallisuuksiin (eli uuden reseptin luontiin) sekä voi hakea olemass olevia reseptejä.
+
+### Uuden käyttäjän luominen
+
+Syötettäessä uuden käyttäjän luomisnäkymään käyttäjä, jota ei ole olemassa ja painettessa painiketta Create user tapahtuu seuraavaa:
+
+Tapahtumankäsittelijä kutsuu sovelluslogiikan recipebookService metodia createUser, joka luo uuden luokan User-olion ja kutsuu userDao:n metodia createUser paraetrina tämä User-olio. Jos käyttäjää ei ole olemassa, niin userDao lisää käyttäjän tietokantaan ja palauttaa totuusarvon true, muutoin se palauttaa totuusarvon false. Kun käyttäjä on luotu, niin käyttöliittymä vaihtaa näkymäksi loginScenen ja loginSceneen tulee ilmoitus "User successfully created".
+
+### Reseptin lisäys
+
+
+
+### Raaka-aineen lisäys reseptiin
+
+### Reseptin haku
+
 
 ## Ohjelman rakenteen puutteet
 

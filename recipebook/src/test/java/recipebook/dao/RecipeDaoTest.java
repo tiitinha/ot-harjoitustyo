@@ -5,6 +5,7 @@
  */
 package recipebook.dao;
 
+import java.util.List;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 import org.junit.Before;
@@ -27,40 +28,45 @@ public class RecipeDaoTest {
     private UserDao userDao;
     private User user;
 
-    
     @Before
     public void setUp() {
         db = new DatabaseService();
         path = "./src/test/resources/database";
         db.createDatabase(path);
-        userDao = new FakeUserDao();
-        recipeDao = new DatabaseRecipeDao(path, userDao);
-        
-        user = new User("Testi", "salasana");
-        userDao.createUser(user);
+        recipeDao = new DatabaseRecipeDao(path);
     }
-    
+
     @Test
     public void addingARecipeSuccessfullyReturnsTrue() {
         boolean value = recipeDao.addRecipe("test", "Testi");
         assertTrue(value);
     }
-    
+
     @Test
     public void addingIngredientToARecipeAddsIngredient() {
-        recipeDao.addRecipe("omlette", user.getName());
+        recipeDao.addRecipe("omlette", "test");
         Ingredient ingredient = new Ingredient("egg", 1, "pcs");
         recipeDao.addIngredient(ingredient, "omlette");
-        
+
         Recipe recipe = recipeDao.fetchRecipe("omlette");
         assertTrue(recipe.getIngredients().containsKey("egg"));
     }
-    
+
     @Test
     public void fetchRecipeReturnsCorrectRecipe() {
-        recipeDao.addRecipe("omlette", user.getName());
+        recipeDao.addRecipe("omlette", "test");
+
+        assertEquals(new Recipe("omlette", "test"), recipeDao.fetchRecipe("omlette"));
+    }
+
+    @Test
+    public void getUsersRecipesReturnsCorrectRecipes() {
+        recipeDao.addRecipe("omlette", "test");
+        recipeDao.addRecipe("omlette2", "test");
+        recipeDao.addRecipe("omlette3", "test");
+        List<Recipe> recipes = recipeDao.getUsersRecipes("test");
         
-        assertEquals(new Recipe("omlette", user.getName()), recipeDao.fetchRecipe("omlette"));
+        assertEquals(1, recipes.stream().filter(r -> r.getName().equals("omlette")).count());
     }
 
 }

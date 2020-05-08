@@ -62,4 +62,12 @@ public class UserDaoTest {
         assertEquals("testiuser", returnUser.getName());
     }
 
+    @Test
+    public void fetchUsersReturnsTrueIfSuccessful() {
+        User user = new User("Test", "salasana");
+        dao.createUser(user);
+        assertTrue(dao.fetchUsers());
+        assertEquals("Test", dao.findByUserName("Test").getName());
+    }
+    
 }
