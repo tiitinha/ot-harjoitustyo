@@ -16,7 +16,8 @@ Sovelluksen avulla käyttäjät voivat koota reseptikirjaa (lisätä uusia resep
 ## Releaset
 
 [Viikko 6](https://github.com/afroseppo/ot-harjoitustyo/releases/tag/v0.1)
-[Loppurelease]
+
+[Loppurelease](https://github.com/afroseppo/ot-harjoitustyo/releases/tag/v1)
 
 Ohjelma tulee suorittaa komentorivillä komennolla ```java -jar Recipebook.jar``` ja releasessa olevan config.properties-tiedoston tulee olla samassa polussa.
 

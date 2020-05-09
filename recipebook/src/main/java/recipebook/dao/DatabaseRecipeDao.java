@@ -90,7 +90,6 @@ public class DatabaseRecipeDao implements RecipeDao {
         Recipe recipe = fetchRecipe(recipeName.toLowerCase());
 
         int recipeId = getRecipeId(recipeName);
-        System.out.println(recipeId);
 
         if (recipeId > 0) {
 
@@ -108,7 +107,6 @@ public class DatabaseRecipeDao implements RecipeDao {
                 stmt.close();
                 db.close();
 
-                System.out.println("ingredient");
                 recipe.addIngredient(ingredient);
                 return true;
 
@@ -148,7 +146,6 @@ public class DatabaseRecipeDao implements RecipeDao {
                         }
 
                     } catch (SQLException e) {
-                        System.out.println("error");
                         return false;
                     }
                     recipes.add(recipe);

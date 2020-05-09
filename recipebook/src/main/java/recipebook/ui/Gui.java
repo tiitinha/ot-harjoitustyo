@@ -57,7 +57,8 @@ public class Gui extends Application {
 
         recipebook = new RecipebookService(recipeDao, userDao);
         if(!recipebook.connectToDatabase(databaseFile)) {
-            System.out.println("ERROR!");
+            System.out.println("ERROR! Database cannot be connected, shutting down!");
+            
         }
     }
 
@@ -338,7 +339,6 @@ public class Gui extends Application {
         primaryStage.show();
         primaryStage.setOnCloseRequest(e -> {
             System.out.println("closing");
-            System.out.println(recipebook.getLoggedUser());
             if (recipebook.getLoggedUser() != null) {
                 e.consume();
             }

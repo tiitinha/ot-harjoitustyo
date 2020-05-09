@@ -83,7 +83,6 @@ public class DatabaseUserDao implements UserDao {
                 users.add(user);
 
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
                 return false;
             }
             return true;
