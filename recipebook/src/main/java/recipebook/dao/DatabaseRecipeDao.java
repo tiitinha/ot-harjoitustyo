@@ -50,7 +50,6 @@ public class DatabaseRecipeDao implements RecipeDao {
         }
 
         int userId = getUserId(authorName);
-        System.out.println(userId);
         if (userId > 0) {
 
             try {
@@ -64,7 +63,6 @@ public class DatabaseRecipeDao implements RecipeDao {
                 stmt.close();
                 db.close();
 
-                System.out.println("addid");
 
                 recipes.add(recipe);
                 return true;
