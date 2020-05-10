@@ -51,7 +51,7 @@ Sovellus tallentaa käyttäjien, reseptien ja reseptiin kuuluvien raaka-aineiden
 
 ## Päätoiminnallisuudet
 
-Sovelluksen toimintalogiikka kuvataan alla päätoiminnallisuuksien osalta sekvenssikaavioina.
+Sovelluksen toimintalogiikka kuvataan alla päätoiminnallisuuksien osalta.
 
 ### Kirjautuminen
 
@@ -67,12 +67,19 @@ Tapahtumankäsittelijä kutsuu sovelluslogiikan recipebookService metodia create
 
 ### Reseptin lisäys
 
-
+Reseptiä lisättäessä eli klikattaessa päänäkymässä painiketta 'Add a recipe' asettaa tapahtumankäsitteljiä uudeksi näkymäksi addRecipeScenen. Tässä näkymässä käyttäjä voi kirjoittaa reseptin nimen ja painamalla painiketta 'Add a new recipe' tapahtumankäsittelijä kutsuu recipebookService-luokan metodia createNewRecipe parametreina syötetty reseptin nimi sekä kirjautuneen käyttäjän nimi. Sovelluslogiikan metodi createNewRecipe kutsuu reipeDaon metodia addRecipe parametreillä reseptin nimi ja käyttäjän nimi. Sovelluslogiikka palauttaa tämän metodin palauttaman totuusarvon käyttöliittymälle. RecipeDao:n addRecipe-metodi tarkistaa, onko reseptikirjassa jo olemassa reseptiä samlla nimellä. Jos reseptin nimi on uniikki, niin metodi luo tietokantaan uuden reseptin. Tätä varten addRecipe-metodi kutsuu recipeDao:n metodia getUserId, joka hakee tietokannasta käyttäjätaulusta reseptiä lisäävän käyttäjän id:n ja palauttaa sen. Tämän jälkeen addRecipe-metodi lisää reseptitauluun uuden reseptin, lisää reseptin recipeDao-luokan listamuuttujaan recipes  ja palauttaa totuusarvon true. Tämän jälkeen tapahtumankäsittelijä asettaa näkymäksi ingredientScenen, jossa reseptiin voi lisätä raaka-aineita.
 
 ### Raaka-aineen lisäys reseptiin
 
+Käyttäjän syötettyä raaka-aineen nimen, määrän sekä yksikön ja klikattua näppäintä 'Add ingredient' tapahtumakäsittelijä tarkistaa ensin, että onko raaka-aineen määrä numeerinen. Tämän jälkeen määrän ollessa numeerinen kutsuu tapahtumakäsittelijä sovelluslogiikan metodia addIngredient parametreinä raaka-aineen nimi, määrä ja yksikkö.
+
+Sovelluslogiikan metodi addIngredient luo ensin Recipe-luokan olion ja asettaa olioksi metodin fetchRecipe palautusarvona saatavan olion (fetchRecipe hakee reseptin nimellä resptiä ja palautaa Recipe-luokan olion). Tämän jälkeen metodi luo uuden Ingredient-luokan olion parametreinä nimi, määrä ja yksikkö. Tämän jälkeen addIngredient kutsuu luodun reseptiolion metodia addIngredient parametreinä nimi, määrä ja yksikkö. Reseptiluokan metodi addIngredient tarkistaa, että onko reseptissä jo samaa raaka-ainetta lisättynä. Jos raaka-ainetta ei vielä ole lisättynä, lisätään se ja palautetaan totuusarvo true.
+
+Tämän jälkeen sovelluslogiikan metodi addIngredient kutsuu recipeDao-luokan metodia addIngredient parametreina raaka-aineluokan olio sekä reseptin nimi. RecipeDao:n metodi addIngredient tarkistaa onko reseptiä, johon raaka-ainetta ollaan lisäämässä olemassa. Jos on, niin kutsutaan metodia getRecipeId, joka hakee reseptin id:n tietokannasta. Tämän jäkeen lisätään reseptille tietokannan raaka-ainetauluun uusi raaka-aine. 
+
 ### Reseptin haku
 
+Klikattaessa päänäkymän painiketta 'Search' tapahtumakäsittelijä asettaa näkymäksi metodin searchResultScene palauttaman Scene-olion. Metodi searchResultScene saa parametreina etsittävän reseptin nimen (tekstikentän merkkijonoarvo) sekä Stage-luokan olion. Metodi kutsuu sovelluslogiikan metodia fetchRecipe, joka edelleen kutsuu ja palauttaa recipeDao:n fetchRecipe-metodin palautusarvon. RecipeDao:n fetchRecipe-metodi kutsuu palauttaa reseptiluokan olion, jos reseptin nimellä löytyy resepti. Tämän jälkeen käyttöliittymäluokan metodi searchRecipeScene kutsuu reseptiluokan metodia getIngredients, joka palauttaa reseptiluokan luokkamuuttujan recipes (joka on lista). Tämän jälkeen käyttöliittymä iteroi raaka-ainelistan läpi ja kutsuu jokaisen raaka-aineen luokkametodia toString.
 
 ## Ohjelman rakenteen puutteet
 
