@@ -26,4 +26,6 @@
 | 5.5  | 1     | Luokkakuvaajien ym. työstämistä ja testien kirjoittamista + korjailua |
 | 7.5  | 1     | Tietokannasta reseptien haun korjaus |
 | 8.5  | 1.5   | Arkkitehtuurikuvausta ym. dokumentaatiota |
-| yht   | 45	 | |
+| 9.5  | 1     | JavaDoc, dokumentaatio |
+| 10.5 | 3     | JavaDoc, dokumentaatio, release |
+| yht   | 49	 | |
