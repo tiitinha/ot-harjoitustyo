@@ -11,13 +11,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- *
+ * Service class that handles the creation of the database used to store the data in long term.
  * @author tiitinha
  */
 public class DatabaseService {
 
     /**
-     * Creates a new database file and tables, if they do not exist
+     * Creates a new database file and tables, if they do not exist.
      * @param path the path to database file
      * @return false if exception during creating the database, otherwise true
      */

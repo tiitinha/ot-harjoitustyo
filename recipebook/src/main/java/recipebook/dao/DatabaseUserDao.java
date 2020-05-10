@@ -16,7 +16,8 @@ import java.util.List;
 import recipebook.domain.User;
 
 /**
- *
+ * An implementation of UserDao interface. Handles saving and fetching user data from
+ * a database. Uses a DAO approach.
  * @author tiitinha
  */
 public class DatabaseUserDao implements UserDao {
@@ -31,10 +32,7 @@ public class DatabaseUserDao implements UserDao {
     }
 
     /**
-     * Gets all users from database and adds them to an ArrayList
-     *
-     * @return returns true, if connection to database successful, otherwise
-     * false
+     * {@inheritDoc}
      */
     @Override
     public boolean fetchUsers() {
@@ -60,10 +58,7 @@ public class DatabaseUserDao implements UserDao {
     }
 
     /**
-     * Creates a new user to the database table User
-     *
-     * @param user an instance of User class
-     * @return true, if user creation successful, otherwise false
+     * {@inheritDoc}
      */
     @Override
     public boolean createUser(User user) {
@@ -91,10 +86,7 @@ public class DatabaseUserDao implements UserDao {
     }
 
     /**
-     * Finds and returns a User-object, if the user with username exist.
-     *
-     * @param username
-     * @return User object, if user exists, otherwise null
+     * {@inheritDoc}
      */
     @Override
     public User findByUserName(String username) {
@@ -105,11 +97,19 @@ public class DatabaseUserDao implements UserDao {
                 .orElse(null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<User> getAllUsers() {
         return users;
     }
-
+    
+    /**
+     * A method that checks whether the user given as a parameter already exists.
+     * @param user the User-object to be checked
+     * @return true, if the user exists, false otherwise
+     */
     public boolean userExists(User user) {
         return users.contains(user);
     }

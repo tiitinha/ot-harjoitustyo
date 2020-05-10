@@ -8,7 +8,7 @@ package recipebook.domain;
 import java.util.HashMap;
 
 /**
- *
+ * Class used represent recipes.
  * @author tiitinha
  */
 public class Recipe implements Comparable<Recipe> {
@@ -17,6 +17,11 @@ public class Recipe implements Comparable<Recipe> {
     private HashMap<String, Ingredient> ingredients;
     private String author;
 
+    /**
+     * Sets the name and author for the recipe object.
+     * @param name the name of the recipe
+     * @param author name of the author of the recipe
+     */
     public Recipe(String name, String author) {
         this.name = name.toLowerCase();
         this.ingredients = new HashMap<>();

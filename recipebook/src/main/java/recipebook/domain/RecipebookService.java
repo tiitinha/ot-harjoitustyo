@@ -10,7 +10,7 @@ import recipebook.dao.RecipeDao;
 import recipebook.dao.UserDao;
 
 /**
- *
+ * Service to handle the app logic for the recipebook.
  * @author tiitinha
  */
 public class RecipebookService {
@@ -19,6 +19,11 @@ public class RecipebookService {
     private UserDao userDao;
     private User loggedIn;
 
+    /**
+     * Sets the recipeDao and userDao to be used when handling data.
+     * @param recipeDao recipeDao-instance, which handles the data-saving and loading of recipes
+     * @param userDao userDao-instance, which handles the data-saving and loading of users
+     */
     public RecipebookService(RecipeDao recipeDao, UserDao userDao) {
         this.recipeDao = recipeDao;
         this.userDao = userDao;
@@ -64,7 +69,7 @@ public class RecipebookService {
 
     /**
      * Checks whether a database to store the data exists, if not, then creates
-     * a new database
+     * a new database.
      *
      * @param path the path of the database file from the config file
      * @return returns true, if connection successful, otherwise false
@@ -89,8 +94,8 @@ public class RecipebookService {
      * Method that assigns the user to be logged in, if the password and
      * username are correct.
      *
-     * @param username username
-     * @param password password
+     * @param username username of the user to be logged in
+     * @param password password of the user to be logged in
      * @return true, if the username exists in the database, false otherwise
      */
     public boolean login(String username, String password) {
@@ -108,6 +113,9 @@ public class RecipebookService {
         return false;
     }
 
+    /**
+     * Method that sets logged user to null.
+     */
     public void logout() {
         loggedIn = null;
     }
@@ -129,9 +137,9 @@ public class RecipebookService {
     }
 
     /**
-     * Returns a recipe with the name
+     * Returns a recipe with the name.
      *
-     * @param name
+     * @param name the name of the recipe to be fetched
      * @return A recipe object with the name equal to the given parameter
      */
     public Recipe fetchRecipe(String name) {
@@ -139,9 +147,9 @@ public class RecipebookService {
     }
 
     /**
-     * Returns a list of recipes with a given username as author
+     * Returns a list of recipes with a given username as author.
      *
-     * @param username
+     * @param username the username of the user whose recipes are searched
      * @return A list of recipes
      */
     public List<Recipe> getUsersRecipes(String username) {

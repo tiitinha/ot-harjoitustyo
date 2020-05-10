@@ -25,11 +25,11 @@ import recipebook.dao.DatabaseRecipeDao;
 import recipebook.dao.DatabaseUserDao;
 import recipebook.dao.RecipeDao;
 import recipebook.dao.UserDao;
-import recipebook.domain.Ingredient;
 import recipebook.domain.Recipe;
 import recipebook.domain.RecipebookService;
 
 /**
+ * A class that implements the GUI for the recipebook.
  *
  * @author tiitinha
  */
@@ -56,9 +56,9 @@ public class Gui extends Application {
         RecipeDao recipeDao = new DatabaseRecipeDao(databaseFile);
 
         recipebook = new RecipebookService(recipeDao, userDao);
-        if(!recipebook.connectToDatabase(databaseFile)) {
+        if (!recipebook.connectToDatabase(databaseFile)) {
             System.out.println("ERROR! Database cannot be connected, shutting down!");
-            
+
         }
     }
 
@@ -76,7 +76,7 @@ public class Gui extends Application {
         loginPane.setPadding(new Insets(10));
         Label loginLabel = new Label("Username");
         Label passwordLabel = new Label("Password");
-        Label welcomeLabel = new Label("Welcome to the Recipebook! The app is currently under construction");
+        Label welcomeLabel = new Label("Welcome to the Recipebook!");
         TextField usernameInput = new TextField();
         PasswordField usernamePassword = new PasswordField();
 
@@ -346,6 +346,13 @@ public class Gui extends Application {
         });
     }
 
+    /**
+     * Method to build the scene for search results. Returns a Scene-object.
+     *
+     * @param recipeName The name of the recipe which is searched
+     * @param primaryStage The PrimaryStage
+     * @return Scene-object of the search result scene.
+     */
     public Scene searchResultScene(String recipeName, Stage primaryStage) {
         HBox menuPane = new HBox(10);
         menuPane.setPadding(new Insets(10));
@@ -356,9 +363,9 @@ public class Gui extends Application {
         backButton.setOnAction(e -> {
             primaryStage.setScene(mainScene);
         });
-        
+
         menuPane.getChildren().addAll(menuSpacer, backButton);
-        
+
         VBox searchResultPane = new VBox(10);
         searchResultPane.setPadding(new Insets(10));
         Label searchResultLabel = new Label("");

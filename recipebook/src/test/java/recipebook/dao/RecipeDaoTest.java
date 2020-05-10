@@ -70,5 +70,10 @@ public class RecipeDaoTest {
         
         assertEquals(1, recipes.stream().filter(r -> r.getName().equals("omlette")).count());
     }
+    
+    @Test
+    public void fetchAllRecipesReturnsTrueWhenSuccessful() {
+        assertTrue(recipeDao.fetchAllRecipes());
+    }
 
 }

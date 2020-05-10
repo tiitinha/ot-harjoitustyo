@@ -19,7 +19,8 @@ import recipebook.domain.Recipe;
 ;
 
 /**
- *
+ * A implementation of RecipeDao interface. Handles saving data to and fetching data from
+ * the database, using a DAO-approach.
  * @author tiitinha
  */
 public class DatabaseRecipeDao implements RecipeDao {
@@ -33,12 +34,7 @@ public class DatabaseRecipeDao implements RecipeDao {
     }
 
     /**
-     * Adds a new recipe to the database, if the recipe doesn't already exist.
-     *
-     * @param name name of the recipe
-     * @param authorName the name of the author of the recipe
-     * @return returns false if the adding fails either due to exception or
-     * recipe already exists, otherwise true
+     * {@inheritDoc}
      */
     @Override
     public boolean addRecipe(String name, String authorName) {
@@ -63,7 +59,6 @@ public class DatabaseRecipeDao implements RecipeDao {
                 stmt.close();
                 db.close();
 
-
                 recipes.add(recipe);
                 return true;
             } catch (NumberFormatException | SQLException e) {
@@ -75,11 +70,7 @@ public class DatabaseRecipeDao implements RecipeDao {
     }
 
     /**
-     * Adds an ingredient for a recipe in the database.
-     *
-     * @param ingredient the ingredient to be added to a recipe and database
-     * @param recipeName the name of the recipe to which the ingredient is added
-     * @return
+     * {@inheritDoc}
      */
     @Override
     public boolean addIngredient(Ingredient ingredient, String recipeName) {
@@ -118,10 +109,7 @@ public class DatabaseRecipeDao implements RecipeDao {
     }
 
     /**
-     * Fetches all recipes from the database and adds them to the object
-     * variable recipes
-     *
-     * @return true, if database query is successful, otherwise false
+     * {@inheritDoc}
      */
     @Override
     public boolean fetchAllRecipes() {
@@ -135,7 +123,7 @@ public class DatabaseRecipeDao implements RecipeDao {
                     int recipeId = rs.getInt(1);
                     try {
                         PreparedStatement stmtIngredients = db.prepareStatement("SELECT name, amount, unit from Ingredient WHERE recipeId = ?;");
-                        
+
                         stmtIngredients.setInt(1, recipeId);
 
                         ResultSet rsIngredient = stmtIngredients.executeQuery();
@@ -212,10 +200,7 @@ public class DatabaseRecipeDao implements RecipeDao {
     }
 
     /**
-     * Fetches and returns a recipe
-     *
-     * @param name name of the recipe to be fetched
-     * @return Recipe object, if the recipe exists, otherwise null
+     * {@inheritDoc}
      */
     @Override
     public Recipe fetchRecipe(String name) {
@@ -223,8 +208,7 @@ public class DatabaseRecipeDao implements RecipeDao {
     }
 
     /**
-     *
-     * @return A list of all recipes in the recipebook
+     * {@inheritDoc}
      */
     @Override
     public List<Recipe> getAll() {
@@ -232,9 +216,7 @@ public class DatabaseRecipeDao implements RecipeDao {
     }
 
     /**
-     *
-     * @param username
-     * @return A list of all recipes with the given user as the author
+     * {@inheritDoc}
      */
     @Override
     public List<Recipe> getUsersRecipes(String username) {

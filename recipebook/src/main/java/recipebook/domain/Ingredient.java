@@ -6,18 +6,19 @@
 package recipebook.domain;
 
 /**
- * The class represents a single ingredient that is used in a recipe. Each ingredient is associated with a name, amount and unit of of the amount.
+ * The class represents a single ingredient that is used in a recipe. Each
+ * ingredient is associated with a name, amount and unit of of the amount.
+ *
  * @author tiitinha
  */
 public class Ingredient {
-    
+
     private String name;
     private int amount;
     private String unit;
 
-    
     /**
-     * 
+     * Sets the name, amount and unit for the ingredient object.
      * @param name name of the ingredient
      * @param amount amount of the said ingredient
      * @param unit unit of the amount
@@ -38,16 +39,18 @@ public class Ingredient {
 
     public String getUnit() {
         return unit;
-    }    
+    }
 
     /**
-     * 
-     * @return a string representation of the ingredient, form is name: amount unit
+     * A implementation of toString that returns ingredient information in
+     * String-format.
+     *
+     * @return a string representation of the ingredient, form is name: amount
+     * unit
      */
     @Override
     public String toString() {
         return name + ": " + amount + " " + unit;
     }
-    
-    
+
 }

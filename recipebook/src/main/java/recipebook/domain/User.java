@@ -6,7 +6,7 @@
 package recipebook.domain;
 
 /**
- *
+ * Class for users in the recipebook, handles checking password etc.
  * @author tiitinha
  */
 public class User implements Comparable<User> {
@@ -15,7 +15,7 @@ public class User implements Comparable<User> {
     private String password;
 
     /**
-     * 
+     * Sets the name and the password of the user.
      * @param name name of the user
      * @param password password of the user
      */
@@ -43,6 +43,11 @@ public class User implements Comparable<User> {
         return name.equals(other.name);
     }
     
+    /**
+     * Checks whether the given password matches the password of the user.
+     * @param pw The password to be checked
+     * @return true if the given password is correct, otherwise false.
+     */
     public boolean checkPassword(String pw) {
         return password.equals(pw);
     }
