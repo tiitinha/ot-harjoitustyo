@@ -14,6 +14,6 @@ DAOn luokille UserDao ja RecipeDao on muutama yksikkötesti, joka testaa, että 
 
 ### Testikattavuus
 
-<img src="" width="450">
+<img src="https://raw.githubusercontent.com/afroseppo/ot-harjoitustyo/master/dokumentaatio/kuvaajat/testikattavuus.png" width="450">
 
 Testikattavuus brancheissa jää matalaksi, sillä yksikkötestit eivät testaa metodien toimintaa tilanteissa, joissa tietokantaan yhditstäminen ei toimi. Näissä tilanteissa ohjelma palauttaa totuusarvon false ja ongelma käsitlelään sovelluslogiikassa tai GUI:ssa.
