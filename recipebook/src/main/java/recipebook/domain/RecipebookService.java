@@ -11,6 +11,7 @@ import recipebook.dao.UserDao;
 
 /**
  * Service to handle the app logic for the recipebook.
+ *
  * @author tiitinha
  */
 public class RecipebookService {
@@ -21,8 +22,11 @@ public class RecipebookService {
 
     /**
      * Sets the recipeDao and userDao to be used when handling data.
-     * @param recipeDao recipeDao-instance, which handles the data-saving and loading of recipes
-     * @param userDao userDao-instance, which handles the data-saving and loading of users
+     *
+     * @param recipeDao recipeDao-instance, which handles the data-saving and
+     * loading of recipes
+     * @param userDao userDao-instance, which handles the data-saving and
+     * loading of users
      */
     public RecipebookService(RecipeDao recipeDao, UserDao userDao) {
         this.recipeDao = recipeDao;
@@ -37,12 +41,8 @@ public class RecipebookService {
      * @return true, if creating the recipe succeeds, otherwise false
      */
     public boolean createNewRecipe(String name, String user) {
-        try {
-            recipeDao.addRecipe(name, user);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        return recipeDao.addRecipe(name, user);
+
     }
 
     /**
@@ -56,15 +56,11 @@ public class RecipebookService {
      * @return true, if adding successful, otherwise false
      */
     public boolean addIngredient(String recipeName, String name, int amount, String unit) {
-        try {
-            Recipe recipe = fetchRecipe(recipeName);
-            Ingredient ingredient = new Ingredient(name, amount, unit);
-            recipe.addIngredient(ingredient);
-            recipeDao.addIngredient(ingredient, recipeName);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        Recipe recipe = fetchRecipe(recipeName);
+        Ingredient ingredient = new Ingredient(name, amount, unit);
+        recipe.addIngredient(ingredient);
+        return recipeDao.addIngredient(ingredient, recipeName);
+
     }
 
     /**
@@ -80,13 +76,7 @@ public class RecipebookService {
 
         database.createDatabase(path);
 
-        try {
-            userDao.fetchUsers();
-            recipeDao.fetchAllRecipes();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        return recipeDao.fetchAllRecipes();
 
     }
 
